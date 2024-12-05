@@ -18,7 +18,7 @@ function MenuList() {
           CONTACT US
         </NavLink>
       </li>
-      <li className="font-montserrat border-[0.5px] border-[#523939] rounded-[10px] py-1 px-10 ">
+      <li className="font-montserrat border-[0.5px] border-brown-primary rounded-[10px] py-1 px-10 ">
         <NavLink className="hover:text-[#523939cd]" to="bookings">
           BOOK AN APPOINTMENT
         </NavLink>

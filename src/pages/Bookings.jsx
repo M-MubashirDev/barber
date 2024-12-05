@@ -1,5 +1,7 @@
+import { Outlet } from "react-router-dom";
+
 function Bookings() {
-  return <div>bookings</div>;
+  return <Outlet />;
 }
 
 export default Bookings;

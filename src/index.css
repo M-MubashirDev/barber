@@ -8,11 +8,14 @@
   font-family: "montserrat";
 } */
 body {
-  font-family: "roboto";
+  font-family: "montserrat", sans-serif;
 }
 .h1-heading {
   @apply md:text-4xl text-3xl  leading-[58.51px] font-[900];
 }
 .italic-p {
   @apply italic font-[500]  leading-[19.5px];
+}
+.basic-p {
+  @apply font-normal text-[20px] leading-[24.38px];
 }

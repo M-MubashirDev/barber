@@ -1,15 +1,28 @@
 import { useState } from "react";
-import Navlist from "./Navlist"; // Import the MenuList component
+import Navlist from "./Navlist"; // Import the Navlist component
 import { MdOutlineCancel } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
 
+  console.log(location);
   return (
-    <nav className="text-white max-w-[1440px] md:px-6 mx-auto py-2 w-full">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <nav className="text-white max-w-[1440px] mx-auto py-5 w-full ">
+      <div
+        className={`max-w-7xl mx-auto px-4 flex ${
+          pathname.includes("/bookings")
+            ? "justify-end py-2"
+            : "justify-between"
+        } items-center`}
+      >
         {/* Logo */}
-        <div className="flex items-center">
+        <div
+          className={`flex ${
+            pathname.includes("/bookings") && "hidden"
+          } items-center`}
+        >
           <img src="logo.png" alt="logo" className="h-16" />
         </div>
 
@@ -44,18 +57,18 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden fixed top-0 right-0 w-full h-full bg-white text-brown-primary font-semibold text-[16px] leading-[1.8] z-50 shadow-lg">
-          <div className="flex flex-col items-end bg-white text-black bg-opacity-30 backdrop-blur-lg w-[75%] md:w-[300px] p-4">
+        <div className="md:hidden fixed top-0 left-0 w-full h-full text-brown-primary font-bold z-50">
+          <div className="flex flex-col items-center bg-white bg-opacity-80 backdrop-blur-lg p-6 w-full h-full">
             {/* Close Button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-brown-primary fixed top-4 right-4 hover:text-black focus:outline-none"
+              onClick={() => setIsOpen(false)}
+              className="absolute top-6 right-6 text-brown-primary hover:text-black focus:outline-none"
             >
               <MdOutlineCancel size={40} />
             </button>
 
             {/* Menu List */}
-            <ul className="flex flex-col gap-6 mt-12">
+            <ul className="flex flex-col items-center gap-8 mt-12">
               <Navlist />
             </ul>
           </div>
@@ -64,5 +77,16 @@ function Navbar() {
     </nav>
   );
 }
-
+// function NavBarDesktopLinks() {
+//   return (
+//     <>
+//       {" "}
+//       <ul className="hidden md:flex items-center space-x-8 text-brown-primary font-semibold text-[16px] leading-[1.8]">
+//         <Navlist />
+//       </ul>
+//     </>
+//   );
+// }
+// function NavBarLogo() {}
 export default Navbar;
+//
