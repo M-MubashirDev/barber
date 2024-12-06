@@ -9,6 +9,7 @@
 } */
 body {
   font-family: "montserrat", sans-serif;
+  overflow-x: hidden;
 }
 .h1-heading {
   @apply md:text-4xl text-3xl  leading-[58.51px] font-[900];
@@ -18,4 +19,11 @@ body {
 }
 .basic-p {
   @apply font-normal text-[20px] leading-[24.38px];
+}
+/* about us */
+.about-p {
+  @apply font-normal text-[20px] leading-[24.38px];
+}
+.about-H1 {
+  @apply font-extrabold  text-brown-primary md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
 }

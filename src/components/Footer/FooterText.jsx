@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 
 // Compound Component for Footer Section
 function FooterText({ children }) {
-  return <ul className="flex flex-col text-white text-start">{children}</ul>;
+  return <ul className="flex flex-col    text-white text-start">{children}</ul>;
 }
 
 // Heading Component

@@ -7,7 +7,7 @@ function Layout() {
       <nav className="w-screen border-b-[0.5px] border-black">
         <Navbar />
       </nav>
-      <main className="flex-1  ">
+      <main className="flex-1">
         <Outlet />
       </main>
     </div>
