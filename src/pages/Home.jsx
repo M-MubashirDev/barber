@@ -16,9 +16,14 @@ function Home() {
       <Testimonial />
       <section className="text-center flex flex-col  gap-8 bg-white ">
         <Footer>
-          <Footer.Logo logo="footer.png" />
+          <Footer.Logo logo="imagefooter.png" />
           <Footer.Heads>
-            DONT WAIT LOOK GREAT YOUR LOOK STARTS HERE
+            <span className="lg:tracking-wider">
+              DON&apos;T WAIT LOOK GREAT
+            </span>
+            <span className="lg:block lg:tracking-tight">
+              YOUR LOOK STARTS HERE
+            </span>
           </Footer.Heads>
           <Footer.Para>
             The clock’s ticking, and that perfect style isn’t going to cut

@@ -8,7 +8,7 @@ function FooterDetails() {
         alt="logo"
         className="lg:min-w-full lg:min-h-full p-2 justify-self-center"
       />
-      <div className="grid grid-cols-2 gap-6 py-4 px-4 lg:pl-8  md:grid-cols-4 bg-brown-primary justify-evenlyz  items-center ">
+      <div className="grid grid-cols-2 gap-6 py-4 px-4 lg:pl-8  md:grid-cols-4 bg-brown-primary justify-center   items-center ">
         <FooterText>
           <FooterText.Heading>OPEN DAILY</FooterText.Heading>
           <FooterText.ListItem>Mon-Fri - 1:30pm-6:30pm</FooterText.ListItem>
@@ -25,7 +25,6 @@ function FooterDetails() {
           <FooterText.ListItem> United States </FooterText.ListItem>
         </FooterText>
         <FooterText>
-          {/*  */}
           <FooterText.Heading>QUICK LINKS</FooterText.Heading>
           <FooterText.ListItem>Home</FooterText.ListItem>
           <FooterText.ListItem>About Us</FooterText.ListItem>

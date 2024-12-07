@@ -3,16 +3,16 @@ function PerfectMatch() {
     <section className="bg-white py-6">
       <div className="max-w-[1440px] p-6 flex flex-col gap-12 justify-center items-center mx-auto w-full md:w-[90%]">
         {/* Title and description */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-12 text-center md:text-left">
+        <div className="flex flex-col pt-12 md:flex-row justify-center items-center gap-8 md:gap-12 text-center md:text-left">
           <div className="text-brown-primary w-full">
             <p className="italic-p">PICK YOUR PERFECT MATCH</p>
             <h1 className="h1-heading">YOUR STYLE, YOUR BARBER</h1>
           </div>
-          <p className="md:max-w-[500px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            voluptas sunt praesentium distinctio, harum consequatur tempora
-            veniam repudiandae quae sequi, animi doloremque officiis tempore
-            possimus expedita deleniti, tenetur optio nulla.
+          <p className="max-w-[50%] primary-p">
+            Why settle for whoever’s available? Here, it’s personal. Browse our
+            roster of skilled barbers, each with a signature style and a knack
+            for perfection. Choose your pro, book your spot, and watch your
+            vision come to life.
           </p>
         </div>
 
@@ -21,7 +21,7 @@ function PerfectMatch() {
           <button className="border border-white rounded-[20px] px-12 py-2">
             Book Now
           </button>
-          <p className="text-center md:text-left">
+          <p className="text-center  md:text-left">
             To lock in your favorite barber and get ready to turn heads
           </p>
         </div>
@@ -35,19 +35,19 @@ function PerfectMatch() {
           />
           <div className="flex flex-col gap-2 text-center md:text-left">
             <h1 className="h1-heading text-brown-primary">
-              GET THE LOOK YOU LOVE EVERY TIME
+              GET THE LOOK YOU LOVE <span className="lg:block">EVERY TIME</span>
             </h1>
-            <p className="md:max-w-[500px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-              aliquam laborum aperiam maiores perspiciatis sint natus? Magnam
-              ipsa quam tenetur commodi ab illo beatae a? Sed dolorem ab illo
-              earum?
+            <p className=" primary-p">
+              Every cut tells a story, and we’re here to make sure yours stands
+              out. Whether you’re here for a fresh fade, a crisp beard trim, a
+              quick buzz, or even a first haircut for your little one, we’ve got
+              you covered.
             </p>
           </div>
         </div>
 
         {/* Call to action section */}
-        <p className="border border-black py-2 px-8 md:px-32 rounded-[10px] text-center md:text-left">
+        <p className="border border-brown-primary uppercase text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
           CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
         </p>
       </div>

@@ -11,12 +11,6 @@ body {
   font-family: "montserrat", sans-serif;
   overflow-x: hidden;
 }
-.h1-heading {
-  @apply md:text-4xl text-3xl  leading-[58.51px] font-[900];
-}
-.italic-p {
-  @apply italic font-[500]  leading-[19.5px];
-}
 .basic-p {
   @apply font-normal text-[20px] leading-[24.38px];
 }
@@ -26,4 +20,19 @@ body {
 }
 .about-H1 {
   @apply font-extrabold  text-brown-primary md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
+}
+.about-bullet::before {
+  @apply content-['•'] text-black text-3xl mr-4;
+}
+
+/* primary */
+.primary-p {
+  @apply font-normal sm:text-[20px] leading-[24.38px];
+}
+
+.italic-p {
+  @apply font-medium uppercase italic sm:text-base leading-[19.5px];
+}
+.h1-heading {
+  @apply font-black   md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
 }
