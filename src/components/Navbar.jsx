@@ -9,7 +9,11 @@ function Navbar() {
 
   console.log(location);
   return (
-    <nav className="text-white max-w-[1440px] mx-auto py-2 w-full ">
+    <nav
+      className={`text-white max-w-[1440px] mx-auto ${
+        pathname.includes("/bookings") ? "py-[13.8px]" : "py-2"
+      }   w-full `}
+    >
       <div
         className={`max-w-7xl mx-auto px-4 flex ${
           pathname.includes("/bookings")

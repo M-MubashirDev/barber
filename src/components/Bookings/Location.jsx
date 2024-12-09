@@ -6,7 +6,7 @@ function Location() {
     <div
       style={{
         backgroundImage: "url('locationbg.png')",
-        minHeight: "calc(100vh - 86.4px)",
+        minHeight: "calc(100vh - 82.8px)",
         backgroundPosition: "bottom",
         backgroundSize: "cover",
       }}

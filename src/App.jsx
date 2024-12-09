@@ -4,10 +4,10 @@ import About from "./pages/About";
 import Bookings from "./pages/Bookings";
 import Layout from "./components/Layout";
 import Contectus from "./pages/Contectus";
-import Location from "./components/Footer/Bookings/Location";
-import Professional from "./components/Footer/Bookings/Professional";
-import Services from "./components/Footer/Bookings/Services";
-import Time from "./components/Footer/Bookings/Time";
+import Location from "./components/Bookings/Location";
+import Professional from "./components/Bookings/Professional";
+import Services from "./components/Bookings/Services";
+import Time from "./components/Bookings/Time";
 function App() {
   return (
     <BrowserRouter>
@@ -17,11 +17,9 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="bookings" element={<Bookings />}>
             <Route index element={<Location />} />
-            <Route path="professional" element={<Professional />}>
-              <Route path="services" element={<Services />}>
-                <Route path="time" element={<Time />} />
-              </Route>
-            </Route>
+            <Route path="professional" element={<Professional />} />
+            <Route path="professional/services" element={<Services />} />
+            <Route path="professional/services/time" element={<Time />} />
           </Route>
           <Route path="contact" element={<Contectus />} />
         </Route>

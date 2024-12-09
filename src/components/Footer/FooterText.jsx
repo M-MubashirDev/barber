@@ -3,7 +3,7 @@
 // Compound Component for Footer Section
 function FooterText({ children }) {
   return (
-    <ul className="flex flex-col max-w-fit  text-white text-start  ">
+    <ul className="flex flex-col max-w-fit   text-white text-start  ">
       {children}
     </ul>
   );
@@ -22,7 +22,7 @@ function FooterTextHeading({ children }) {
 // ListItem Component
 function FooterTextListItem({ children }) {
   return (
-    <li className="sm:font-semibold sm:text-[20px] leading-[24.38px]">
+    <li className="sm:font-semibold sm:text-[17px] leading-[24.38px]">
       {children}
     </li>
   );

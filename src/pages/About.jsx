@@ -89,14 +89,14 @@ function About() {
               building a community.
             </p>
             <div className="sm:min-w-[35%] min-w-1 bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
-            <div className="flex flex-col text-center items-center justify-center gap-12">
+            <div className="flex sm:flex-col sm:text-center lg:text-start lg:flex-row items-center justify-center gap-12">
               <img src="aboutsome.png" alt="about tools" />
               <div>
                 <h1 className="text-brown-primary mb-4 h1-heading">
                   Your Experience Matters
                 </h1>
                 <p className="primary-p">We focus on:</p>
-                <ul className="primary-p ml-2 -space-y-3  ">
+                <ul className="primary-p ml-2 text-start -space-y-3  ">
                   <li className="about-bullet ">
                     A clean and welcoming environment.
                   </li>
