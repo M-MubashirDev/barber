@@ -33,8 +33,10 @@ function FooterDetails() {
         <FooterText>
           <FooterText.Heading>CONTACT</FooterText.Heading>
           <FooterText.ListItem>+1 812-336-0092</FooterText.ListItem>
-          <FooterText.ListItem>hotrodbrbr@yahoo.com</FooterText.ListItem>
-          <div className="flex gap-8 my-2 ml-6">
+          <FooterText.ListItem>
+            hotrodbrbr<span className="inline-block">@yahoo.com</span>
+          </FooterText.ListItem>
+          <div className="flex gap-4 sm:gap-8 my-2 ml:4 sm:ml-6">
             <FooterText.Logotext src="facebook.png" />
             <FooterText.Logotext src="instagram.png" />
           </div>

@@ -25,28 +25,3 @@ function Hero() {
 }
 
 export default Hero;
-// Fon
-// t
-// Roboto
-// Weigh
-// t
-// 600
-// Siz
-// e
-// 24px
-// Line
-//  height
-// 28.13px
-////////////
-// Weigh
-// t
-// 400
-// Siz
-// e
-// 20px
-// Line
-//  height
-// 24.38px
-// Alig
-// n
-// Center

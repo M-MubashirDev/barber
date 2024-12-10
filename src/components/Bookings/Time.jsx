@@ -1,3 +1,4 @@
+import CalendarComp from "./Calendar";
 import LinksBar from "./LinksBar";
 import OrderSummery from "./OrderSummery";
 function Time() {
@@ -6,7 +7,9 @@ function Time() {
       <div className="max-w-fit ">
         <LinksBar />
         <h1 className="booking-h1">Choose DaTE & TIME</h1>
-        <div></div>
+        <div className="min-w-full">
+          <CalendarComp />
+        </div>
         <button className="font-semibold mt-8  bg-brown-primary min-w-52 min-h-12 text-[16px] leading-[19.5px] rounded-[10px] text-white">
           CHOOSE TIME
         </button>
