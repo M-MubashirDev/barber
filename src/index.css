@@ -11,19 +11,16 @@ body {
   font-family: "montserrat", sans-serif;
   overflow-x: hidden;
 }
-.basic-p {
-  @apply font-normal text-[20px] leading-[24.38px];
-}
+/* .basic-p {
+  @apply font-normal text-[20px] leading-[24.38px]; */
+/* } */
 /* about us */
-.about-p {
+/* .about-p {
   @apply font-normal text-[20px] leading-[24.38px];
 }
 .about-H1 {
   @apply font-extrabold  text-brown-primary md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
-}
-.about-bullet::before {
-  @apply content-['•'] text-black text-3xl mr-4;
-}
+} */
 /* Booking  */
 .booking-h1 {
   @apply uppercase font-[900]  text-center md:text-start text-3xl md:text-5xl text-brown-primary leading-[58.51px] mb-10 mt-2;
@@ -38,4 +35,8 @@ body {
 }
 .h1-heading {
   @apply font-black   md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
+}
+
+.about-bullet::before {
+  @apply content-['•'] text-black text-3xl mr-4;
 }

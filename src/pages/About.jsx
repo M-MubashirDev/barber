@@ -7,7 +7,7 @@ function About() {
       <div>
         <section
           style={{
-            backgroundImage: "url('handsome.png')",
+            backgroundImage: "url('handsome.webp')",
           }}
           className="bg-no-repeat bg-cover  uppercase object-center  text-white"
         >
@@ -25,7 +25,7 @@ function About() {
           <div className=" flex flex-col gap-16 max-w-full mx-auto  w-[90%]">
             <div className="flex flex-col-reverse   gap-6 lg:flex-row lg:text-start text-center justify-center items-center lg:gap-12 ">
               <img
-                src="children-hairdresser-cutting.png"
+                src="children-hairdresser-cutting.webp"
                 className="lg:max-w-[50%] max-w-full lg:place-self-start"
                 alt="cutting hairs"
               />
@@ -56,7 +56,7 @@ function About() {
                 </p>
               </div>
               <img
-                src="barber-styling.png"
+                src="barber-styling.webp"
                 className="lg:max-w-[50%]  max-w-full"
                 alt="hair styling"
               />
@@ -82,15 +82,15 @@ function About() {
             <h1 className="h1-heading text-brown-primary ">
               More Than a Barbershop
             </h1>
-            <p className="primary-p mb-6 max-w-[58%] ">
+            <p className="primary-p mb-6 lg:max-w-[58%] ">
               This is a place where first-time clients become lifelong regulars.
               From the laughter that fills the room to the personalized care in
               every service, we’re building more than great haircuts—we’re
               building a community.
             </p>
             <div className="sm:min-w-[35%] min-w-1 bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
-            <div className="flex sm:flex-col sm:text-center lg:text-start lg:flex-row items-center justify-center gap-12">
-              <img src="aboutsome.png" alt="about tools" />
+            <div className="flex flex-col text-center lg:text-start lg:flex-row items-center justify-center gap-12">
+              <img src="aboutsome.webp" alt="about tools" />
               <div>
                 <h1 className="text-brown-primary mb-4 h1-heading">
                   Your Experience Matters

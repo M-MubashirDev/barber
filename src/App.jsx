@@ -1,29 +1,39 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Bookings from "./pages/Bookings";
+// import Home from "./pages/Home";
+// import About from "./pages/About";
+// import Bookings from "./pages/Bookings";
+// import Contectus from "./pages/Contectus";
+import { lazy, Suspense } from "react";
+const About = lazy(() => import("./pages/About"));
+const Home = lazy(() => import("./pages/Home"));
+const Bookings = lazy(() => import("./pages/Bookings"));
+const Contectus = lazy(() => import("./pages/Contectus"));
 import Layout from "./components/Layout";
-import Contectus from "./pages/Contectus";
 import Location from "./components/Bookings/Location";
 import Professional from "./components/Bookings/Professional";
 import Services from "./components/Bookings/Services";
 import Time from "./components/Bookings/Time";
+import Spinner from "./components/Spinner";
+import PageNotFound from "./components/PageNotFound";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="bookings" element={<Bookings />}>
-            <Route index element={<Location />} />
-            <Route path="professional" element={<Professional />} />
-            <Route path="professional/services" element={<Services />} />
-            <Route path="professional/services/time" element={<Time />} />
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="bookings" element={<Bookings />}>
+              <Route index element={<Location />} />
+              <Route path="professional" element={<Professional />} />
+              <Route path="professional/services" element={<Services />} />
+              <Route path="professional/services/time" element={<Time />} />
+            </Route>
+            <Route path="contact" element={<Contectus />} />
+            <Route path="*" element={<PageNotFound />} />
           </Route>
-          <Route path="contact" element={<Contectus />} />
-        </Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
@@ -31,8 +41,8 @@ function App() {
 export default App;
 {
   /* <div
-    className="absolute left-1/2 transform -translate-x-1/2 bg-white md:max-w-[70%] rounded-[20px] max-w-fit max-h-fit p-4 shadow-lg"
-    style={{
+  className="absolute left-1/2 transform -translate-x-1/2 bg-white md:max-w-[70%] rounded-[20px] max-w-fit max-h-fit p-4 shadow-lg"
+  style={{
       top: "calc(100% - 50px)", // Adjust to control how much is inside/outside
     }}
   >

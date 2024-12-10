@@ -39,7 +39,9 @@ function Navbar() {
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-brown-primary hover:text-black focus:outline-none"
+            className="text-brown-primary hover:text-black focus:outline-none focus:ring-2 focus:ring-brown-primary"
+            aria-label="Toggle navigation menu"
+            // className="text-brown-primary hover:text-black focus:outline-none md:hidden" //change
           >
             <svg
               className="h-6 w-6"
@@ -73,7 +75,7 @@ function Navbar() {
 
             {/* Menu List */}
             <ul className="flex flex-col items-center gap-8 mt-12">
-              <Navlist />
+              <Navlist setIsOpen={setIsOpen} isOpen={isOpen} />
             </ul>
           </div>
         </div>

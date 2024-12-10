@@ -11,7 +11,7 @@ function AboutFooter() {
           to make it happen. Pick your barber, relax in the chair, and leave
           feeling like the best version of yourself.
         </Footer.Para>
-        <Footer.Button>Book Your Appointment Now &nbsp;{">"} </Footer.Button>
+        <Footer.Button>Book Your Appointment Now</Footer.Button>
       </Footer>
       <FooterDetails />
     </div>

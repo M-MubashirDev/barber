@@ -67,7 +67,7 @@ const CalendarComp = () => {
   const nextMonthName = getMonthName(nextMonthIndex, nextMonthYear);
 
   return (
-    <div className="min -w-full mx-auto  bg-white rounded-lg p-6">
+    <div className="min-w-full mx-auto  bg-white rounded-lg p-6">
       {/* Header */}
       <div className="flex justify-center gap-4 items-center mb-6">
         {/* Current Month Button */}

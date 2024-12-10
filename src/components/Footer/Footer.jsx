@@ -25,8 +25,8 @@ function Para({ children }) {
 }
 function Button({ children }) {
   return (
-    <button className="font-[600]  leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[16px] min-h-12 md:min-w-[70%]">
-      {children}
+    <button className="font-[600] px-2  leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[16px] min-h-12 md:min-w-[70%]">
+      {children} &gt;
     </button>
   );
 }

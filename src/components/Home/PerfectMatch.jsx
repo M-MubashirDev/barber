@@ -8,7 +8,7 @@ function PerfectMatch() {
             <p className="italic-p">PICK YOUR PERFECT MATCH</p>
             <h1 className="h1-heading">YOUR STYLE, YOUR BARBER</h1>
           </div>
-          <p className="max-w-[50%] primary-p">
+          <p className="lg:max-w-[50%] primary-p">
             Why settle for whoever’s available? Here, it’s personal. Browse our
             roster of skilled barbers, each with a signature style and a knack
             for perfection. Choose your pro, book your spot, and watch your
@@ -29,10 +29,11 @@ function PerfectMatch() {
         {/* Image and content section */}
         <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 items-center md:items-start">
           <img
-            src="handsomeMan.png"
-            alt="random"
-            className="w-full md:w-[40%] object-cover"
+            src="handsomeMan.webp"
+            alt="Handsome man getting a haircut"
+            className="w-full md:w-1/2 object-cover"
           />
+          {/* //change */}
           <div className="flex flex-col gap-2 text-center md:text-left">
             <h1 className="h1-heading text-brown-primary">
               GET THE LOOK YOU LOVE <span className="lg:block">EVERY TIME</span>

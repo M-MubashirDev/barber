@@ -1,8 +1,9 @@
 function ContactUs() {
   return (
+    // contect.png'
     <section
       style={{
-        backgroundImage: "url('contect.png')",
+        backgroundImage: "url('contect.webp')",
         minHeight: "calc(100vh - 80.8px)",
       }}
       className="bg-no-repeat flex flex-col items-center justify-center bg-cover w-full"

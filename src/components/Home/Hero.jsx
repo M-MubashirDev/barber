@@ -2,7 +2,7 @@ function Hero() {
   return (
     <section
       style={{
-        backgroundImage: "url('heroBack.png')",
+        backgroundImage: "url('heroBack.webp')",
         minHeight: "calc(90vh - 150px)",
       }} // Ensure the URL is correct
       className="bg-no-repeat flex flex-col text-center justify-center bg-cover bg-center "
