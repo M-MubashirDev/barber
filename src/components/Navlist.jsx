@@ -3,27 +3,19 @@ import { NavLink } from "react-router-dom";
 function MenuList({ setIsOpen }) {
   return (
     <>
-      <li>
-        <NavLink
-          onClick={() => setIsOpen(false)}
-          className="hover:text-[#52393989]"
-          to="/"
-        >
+      <li onClick={() => setIsOpen(false)}>
+        <NavLink className="hover:text-[#52393989]" to="/">
           HOME
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          onClick={() => setIsOpen(false)}
-          className="hover:text-[#523939cd]"
-          to="about"
-        >
+      <li onClick={() => setIsOpen(false)}>
+        <NavLink className="hover:text-[#523939cd]" to="about">
           ABOUT US
         </NavLink>
       </li>
-      <li>
+      <li onClick={() => setIsOpen(false)}>
         <NavLink
-          onClick={() => setIsOpen(false)}
+          // onClick={() => setIsOpen(false)}
           className="hover:text-[#523939cd]"
           to="contact"
         >
