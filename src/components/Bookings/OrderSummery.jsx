@@ -1,4 +1,20 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+
+/* eslint-disable react/prop-types */
 function OrderSummery() {
+  const { id } = useParams();
+  const {
+    obj: { totalPrice, totalTime },
+    oderSummery,
+  } = JSON.parse(sessionStorage.getItem("selectedServices"));
+  const professinols = JSON.parse(sessionStorage.getItem("professionaldata"));
+  const currentProfessionals = professinols
+    ?.filter((val) => val._id === id)
+    .at(0);
+  const { name, image } = currentProfessionals;
+  console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
+
   return (
     <div className="min-h-[100vh] flex flex-col   my-14 px-4 py-6 bg-[#ECECEC] min-w-full  rounded-[20px]">
       <h1 className="font-semibold text-[32px] mb-6 text-center text-brown-primary leading-[39.01px]">
@@ -8,27 +24,37 @@ function OrderSummery() {
         Professional:{" "}
       </p>
       <div className="flex gap-2 mb-2 items-center">
-        <img src="/imgCircle.png" alt="barber" className="max-w-12" />
-        <p className="font-semibold text-[16px] leading-[19.5px]">Ian B.</p>
+        <img
+          src={image}
+          alt="barber"
+          className="min-w-12 min-h-12 w-12 h-12   rounded-[50%]"
+        />
+        <p className="font-semibold text-[16px] leading-[19.5px]">{name}</p>
       </div>
       <p className="font-medium  text-brown-primary text-[20px] leading-[24.38px]">
         Services:
       </p>
-      <p className="font-medium text-[16px] mb-3  flex justify-between leading-[19.5px]">
-        <span>HairCut</span>{" "}
-        <span className="font-semibold text-brown-primary text-[18px] leading-[21.94px]">
-          $26
-        </span>
-      </p>
+      {oderSummery?.map((val) => (
+        <React.Fragment key={val._id}>
+          <p className="font-medium text-[16px] mb-3  flex md:flex-row flex-col gap-1 md:gap-0 justify-between leading-[19.5px]">
+            <span>{val.title}</span>{" "}
+            <span className="font-semibold text-brown-primary text-[18px] leading-[21.94px]">
+              ${val.time}
+            </span>
+          </p>
+        </React.Fragment>
+      ))}
       <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
         ToTal Services Time:
       </p>
       <p className="font-medium text-[16px] flex justify-between leading-[19.5px]">
-        30 Min
+        {totalTime} Min
       </p>
       <div className="flex justify-between items-center  text-brown-primary mt-auto ">
         <h2 className="font-bold text-[20px] leading-[24.38px]">Sub TOTAL</h2>
-        <span className="font-bold text-[40px] leading-[48.76px]">$26</span>
+        <span className="font-bold text-[40px] leading-[48.76px]">
+          ${totalPrice}
+        </span>
       </div>
     </div>
   );

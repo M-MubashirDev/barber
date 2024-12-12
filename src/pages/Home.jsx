@@ -14,7 +14,7 @@ function Home() {
       <PerfectMatch />
       <HygeinePromise />
       <Testimonial />
-      <section className="text-center flex flex-col  gap-8 bg-white ">
+      <section className="text-center flex flex-col  bg-white ">
         <Footer>
           <Footer.Logo logo="imagefooter.png" />
           <Footer.Heads>

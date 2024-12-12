@@ -44,7 +44,9 @@ function About() {
             <div className="flex  flex-col gap-6 lg:flex-row lg:text-start text-center justify-center items-center">
               <div className="lg:max-w-[60%]">
                 <p className="italic-p text-brown-primary">Our Belief</p>
-                <h1 className="mb-6  h1-heading ">Great Style is Personal</h1>
+                <h1 className="mb-6  text-brown-primary h1-heading ">
+                  Great Style is Personal
+                </h1>
                 <p className="place-self-center primary-p">
                   In the heart of our vibrant town, there’s a chair with your
                   name on it—a{" "}

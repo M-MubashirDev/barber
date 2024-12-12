@@ -7,7 +7,6 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
 
-  console.log(location);
   return (
     <nav
       className={`text-white max-w-[1440px] mx-auto ${

@@ -15,27 +15,43 @@ import Services from "./components/Bookings/Services";
 import Time from "./components/Bookings/Time";
 import Spinner from "./components/Spinner";
 import PageNotFound from "./components/PageNotFound";
+import ContextMain from "./components/Bookings/Hooks/useContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 function App() {
+  const queryClient = new QueryClient();
   return (
-    <BrowserRouter>
-      <Suspense fallback={<Spinner />}>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="bookings" element={<Bookings />}>
-              <Route index element={<Location />} />
-              <Route path="professional" element={<Professional />} />
-              <Route path="professional/services" element={<Services />} />
-              <Route path="professional/services/time" element={<Time />} />
-            </Route>
-            <Route path="contact" element={<Contectus />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-    // <Spinner />
+    // <useContextMain>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <ContextMain>
+        <BrowserRouter>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="about" element={<About />} />
+                <Route path="bookings" element={<Bookings />}>
+                  <Route index element={<Location />} />
+                  <Route path="professional" element={<Professional />} />
+                  <Route
+                    path="professional/services/:id"
+                    element={<Services />}
+                  />
+                  <Route
+                    path="professional/services/:id/time"
+                    element={<Time />}
+                  />
+                  {/* */}
+                </Route>
+                <Route path="contact" element={<Contectus />} />
+                <Route path="*" element={<PageNotFound />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </ContextMain>
+    </QueryClientProvider>
   );
 }
 

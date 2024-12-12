@@ -3,7 +3,7 @@ import FooterDetails from "../Footer/FooterDetails";
 
 function AboutFooter() {
   return (
-    <div>
+    <div className="">
       <Footer>
         <Footer.Heads>Take a Seat, You’re in the Right Place</Footer.Heads>
         <Footer.Para>

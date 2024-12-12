@@ -1,13 +1,13 @@
 function Footer({ children }) {
   return (
-    <div className="max-w-[1440px] flex flex-col justify-center items-center text-center gap-4 py-6 mx-auto w-[90%]">
+    <div className="max-w-[1440px] flex flex-col justify-center  items-center text-center gap-4 py-16 mx-auto w-[90%]">
       {children}
     </div>
   );
 }
 
 function Logo({ logo }) {
-  return <img src={`${logo}`} className="mt-3 max-w-[50px]" alt="footer img" />;
+  return <img src={`${logo}`} className=" max-w-[50px]" alt="footer img" />;
 }
 
 function Heads({ children }) {
