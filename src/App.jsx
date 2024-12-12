@@ -16,6 +16,7 @@ import Time from "./components/Bookings/Time";
 import Spinner from "./components/Spinner";
 import PageNotFound from "./components/PageNotFound";
 import ContextMain from "./components/Bookings/Hooks/useContext";
+import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 function App() {
@@ -49,6 +50,36 @@ function App() {
               </Route>
             </Routes>
           </Suspense>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            gutter={8}
+            toastOptions={{
+              // Define default options
+              className: "",
+              duration: 5000,
+              style: {
+                background: "#523939",
+                color: "#fff",
+              },
+
+              // Default options for specific types
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "#523939",
+                  secondary: "black",
+                },
+              },
+              error: {
+                duration: 3000,
+                theme: {
+                  primary: "#523939",
+                  secondary: "red",
+                },
+              },
+            }}
+          />
         </BrowserRouter>
       </ContextMain>
     </QueryClientProvider>
