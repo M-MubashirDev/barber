@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function PerfectMatch() {
   return (
     <section className="bg-white py-6">
@@ -18,8 +20,8 @@ function PerfectMatch() {
 
         {/* Button and description */}
         <div className="flex flex-col md:flex-row py-2 px-4 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
-          <button className="border border-white rounded-[20px] px-12 py-2">
-            Book Now
+          <button className="border border-white hover:border-[#f5f5f5] rounded-[20px] px-12  hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling py-2">
+            <NavLink to="/bookings">Book Now</NavLink>
           </button>
           <p className="text-center  md:text-left">
             To lock in your favorite barber and get ready to turn heads
@@ -48,8 +50,9 @@ function PerfectMatch() {
         </div>
 
         {/* Call to action section */}
-        <p className="border border-brown-primary uppercase text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
+        <p className="border border-brown-primary uppercase hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
           CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
+          &gt;
         </p>
       </div>
     </section>

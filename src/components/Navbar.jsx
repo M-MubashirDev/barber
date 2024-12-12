@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navlist from "./Navlist"; // Import the Navlist component
 import { MdOutlineCancel } from "react-icons/md";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +9,7 @@ function Navbar() {
 
   return (
     <nav
-      className={`text-white max-w-[1440px] mx-auto ${
+      className={`text-white max-w-[1440px] w-[90%] px-1 mx-auto ${
         pathname.includes("/bookings") ? "py-[13.8px]" : "py-2"
       }   w-full `}
     >
@@ -26,7 +26,9 @@ function Navbar() {
             pathname.includes("/bookings") && "hidden"
           } items-center`}
         >
-          <img src="logo.png" alt="logo" className="h-16" />
+          <NavLink to="/">
+            <img src="logo.png" alt="logo" className="h-16" />
+          </NavLink>
         </div>
 
         {/* Desktop Menu */}
@@ -73,7 +75,7 @@ function Navbar() {
             </button>
 
             {/* Menu List */}
-            <ul className="flex flex-col items-center gap-8 mt-12">
+            <ul className="flex flex-col items-center  gap-8 mt-12">
               <Navlist setIsOpen={setIsOpen} isOpen={isOpen} />
             </ul>
           </div>

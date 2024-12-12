@@ -4,19 +4,19 @@ function MenuList({ setIsOpen }) {
   return (
     <>
       <li onClick={() => (setIsOpen ? setIsOpen(false) : "")}>
-        <NavLink className="hover:text-[#52393989]" to="/">
+        <NavLink className="hover:text-[#322424]" to="/">
           HOME
         </NavLink>
       </li>
       <li onClick={() => (setIsOpen ? setIsOpen(false) : "")}>
-        <NavLink className="hover:text-[#523939cd]" to="about">
+        <NavLink className="hover:text-[#322424]" to="about">
           ABOUT US
         </NavLink>
       </li>
       <li onClick={() => (setIsOpen ? setIsOpen(false) : "")}>
         <NavLink
           // onClick={() => (setIsOpen ? setIsOpen(false) : "")}
-          className="hover:text-[#523939cd]"
+          className="hover:text-[#322424]"
           to="contact"
         >
           CONTACT US
@@ -24,9 +24,9 @@ function MenuList({ setIsOpen }) {
       </li>
       <li
         onClick={() => (setIsOpen ? setIsOpen(false) : "")}
-        className="font-montserrat border-[0.5px] border-brown-primary rounded-[10px] py-1 px-10 "
+        className="font-montserrat border-[0.5px] hover:border-[#322424] border-brown-primary rounded-[10px] py-1 md:px-8 px-[1px] lg:px-10 "
       >
-        <NavLink className="hover:text-[#523939cd]" to="bookings">
+        <NavLink className="hover:text-[#322424] " to="bookings">
           BOOK AN APPOINTMENT
         </NavLink>
       </li>

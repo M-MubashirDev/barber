@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Hero() {
   return (
     <section
@@ -12,12 +14,12 @@ function Hero() {
           GET THE HAIR CUT&ensp;
           <span className="lg:block">THAT TURNS HEADS</span>
         </h1>
-        <hr className="border-t white-black w-100% md:w-[53%] " />
-        <p className="font-[600px] font-roboto py-2  text-[16px] sm:text-[20-px] md:text-2xl leading-[28.13px]">
+        <hr className="border-t   w-100% md:place-self-center lg:place-self-start md:w-[80%] lg:w-[53%] " />
+        <p className="font-[600px] font-roboto py-2  sm:text-center sm:place-self-center lg:place-self-start  text-[16px] sm:text-[20-px] md:text-2xl leading-[28.13px]">
           Pick The Barber Who Gets Your Look And Book Your Spot Today
         </p>
-        <button className="border font-roboto font-[600px] border-brown-primary rounded-[10px] text-[14px] sm:text-[16px]  px-12 py-2 bg-brown-primary text-white hover:bg-[#6a4b4b] transition-colors">
-          BOOK AN APPOINTMENT
+        <button className="border sm:place-self-center lg:place-self-start  font-roboto font-semibold border-brown-primary rounded-[10px] text-[14px] sm:text-[16px] px-12 py-2 bg-brown-primary text-white hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling">
+          <NavLink to="/bookings">BOOK AN APPOINTMENT</NavLink>
         </button>
       </div>
     </section>

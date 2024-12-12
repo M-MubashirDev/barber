@@ -30,7 +30,7 @@ function Location() {
         </h2>
         <button
           onClick={() => navigate("professional")}
-          className="font-semibold uppercase text-[32px] max-w-fit p-6   md:py-6 md:px-28 bg-brown-primary leading-[37.5px] rounded-[20px]"
+          className="font-semibold uppercase text-[32px] max-w-fit p-6 hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling  md:py-6 md:px-28 bg-brown-primary leading-[37.5px] rounded-[20px]"
         >
           220 N Walnut St <br /> Bloomington, IN
         </button>
