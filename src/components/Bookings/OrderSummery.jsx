@@ -16,7 +16,7 @@ function OrderSummery() {
   console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
 
   return (
-    <div className="min-h-[100vh] flex flex-col   my-14 px-4 py-6 bg-[#ECECEC] min-w-full  rounded-[20px]">
+    <div className="min-h-[50vh] flex flex-col   my-14 px-4 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
       <h1 className="font-semibold text-[32px] mb-6 text-center text-brown-primary leading-[39.01px]">
         Order Summary
       </h1>
@@ -36,18 +36,18 @@ function OrderSummery() {
       </p>
       {oderSummery?.map((val) => (
         <React.Fragment key={val._id}>
-          <p className="font-medium text-[16px] mb-3  flex md:flex-row flex-col gap-1 md:gap-0 justify-between leading-[19.5px]">
+          <p className="font-medium text-[16px] mb-3  items-center flex flex-row    gap-1 md:gap-0 justify-between leading-[19.5px]">
             <span>{val.title}</span>{" "}
-            <span className="font-semibold text-brown-primary text-[18px] leading-[21.94px]">
-              ${val.time}
+            <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
+              ${val.price}
             </span>
           </p>
         </React.Fragment>
       ))}
       <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
-        ToTal Services Time:
+        Total Services Time:
       </p>
-      <p className="font-medium text-[16px] flex justify-between leading-[19.5px]">
+      <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
         {totalTime} Min
       </p>
       <div className="flex justify-between items-center  text-brown-primary mt-auto ">

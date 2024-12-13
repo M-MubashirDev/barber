@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function Footer({ children }) {
   return (
     <div className="max-w-[1440px] flex flex-col justify-center  items-center text-center gap-4 py-16 mx-auto w-[90%]">
@@ -25,8 +27,8 @@ function Para({ children }) {
 }
 function Button({ children }) {
   return (
-    <button className="font-[600] px-2 hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling  leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[16px] min-h-12 md:min-w-[70%]">
-      {children} &gt;
+    <button className="sm:font-[600] font-[500] px-2 hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling  leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[14px] sm:text-[16px]  min-h-12 md:min-w-[70%]">
+      <NavLink to="/bookings">{children} &gt;</NavLink>
     </button>
   );
 }

@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 function PerfectMatch() {
   return (
-    <section className="bg-white py-6">
-      <div className="max-w-[1440px] p-6 flex flex-col gap-12 justify-center items-center mx-auto w-full md:w-[90%]">
+    <section className="bg-white py-6 ">
+      <div className="max-w-[1440px] py-6 px-4  flex flex-col gap-12 justify-center items-center mx-auto w-full md:w-[90%]">
         {/* Title and description */}
-        <div className="flex flex-col pt-12 md:flex-row justify-center items-center gap-8 md:gap-12 text-center md:text-left">
+        <div className="flex flex-col pt-12 lg:flex-row justify-center items-center gap-8 md:gap-12 text-center lg:text-left">
           <div className="text-brown-primary w-full">
             <p className="italic-p">PICK YOUR PERFECT MATCH</p>
             <h1 className="h1-heading">YOUR STYLE, YOUR BARBER</h1>
@@ -19,7 +19,7 @@ function PerfectMatch() {
         </div>
 
         {/* Button and description */}
-        <div className="flex flex-col md:flex-row py-2 px-4 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
+        <div className="flex flex-col lg:flex-row py-2 px-4 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
           <button className="border border-white hover:border-[#f5f5f5] rounded-[20px] px-12  hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling py-2">
             <NavLink to="/bookings">Book Now</NavLink>
           </button>
@@ -29,14 +29,14 @@ function PerfectMatch() {
         </div>
 
         {/* Image and content section */}
-        <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 items-center md:items-start">
+        <div className="flex flex-col lg:flex-row justify-center gap-8 md:gap-12 items-center md:items-start">
           <img
             src="handsomeMan.webp"
             alt="Handsome man getting a haircut"
-            className="w-full md:w-1/2 object-cover"
+            className="w-full  object-cover"
           />
           {/* //change */}
-          <div className="flex flex-col gap-2 text-center md:text-left">
+          <div className="flex flex-col gap-2 text-center lg:text-left">
             <h1 className="h1-heading text-brown-primary">
               GET THE LOOK YOU LOVE <span className="lg:block">EVERY TIME</span>
             </h1>
@@ -50,10 +50,12 @@ function PerfectMatch() {
         </div>
 
         {/* Call to action section */}
-        <p className="border border-brown-primary uppercase hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
-          CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
-          &gt;
-        </p>
+        <button className="border border-brown-primary uppercase hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
+          <NavLink to="/bookings">
+            CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
+            &gt;
+          </NavLink>
+        </button>
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ function Hero() {
         backgroundImage: "url('heroBack.webp')",
         minHeight: "calc(90vh - 150px)",
       }} // Ensure the URL is correct
-      className="bg-no-repeat flex flex-col text-center justify-center bg-cover bg-center "
+      className="bg-no-repeat flex flex-col text-center px-4  justify-center bg-cover bg-center "
     >
       <div className="max-w-[1440px]  mx-auto w-[90%] text-white flex flex-col justify-center  sm:items-center  md:items-start h-full space-y-6 mb-12">
         <h1 className="font-montserrat  lg:text-start sm:text-[40px] text-[32px] md:text-[60px] lg:text-[75px] font-black leading-tight">

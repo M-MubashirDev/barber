@@ -4,19 +4,19 @@ function HygeinePromise() {
       style={{
         backgroundImage: "url('backgroundbar.webp')",
       }}
-      className="bg-no-repeat text-white bg-cover  bg-center py-12 "
+      className="bg-no-repeat text-white bg-cover px-4  bg-center py-12 "
     >
-      <div className="  py-12 flex flex-col gap-6 m-0  text-left  max-w-[1440px] mx-auto w-[90%]">
+      <div className="  py-12 flex flex-col gap-6 m-0  lg:text-left text-center place-content-center  max-w-[1440px] mx-auto w-[90%]">
         {/* Title and description */}
         <div>
-          <p className="italic-p text-center md:text-left">
+          <p className="italic-p text-center lg:!text-start">
             CLEAN IS THE NEW COOL
           </p>
           <h1 className="h1-heading text-white text-center md:text-left">
             HYGIENE THAT SETS THE BAR HIGH
           </h1>
         </div>
-        <p className="text-center primary-p md:text-left">
+        <p className="text-center primary-p lg:text-left">
           Let’s face it—clean matters. We’ve raised the bar on hygiene, ensuring
           <span className="lg:block">
             every tool, station, and surface sparkles like your fresh fade.
@@ -24,8 +24,8 @@ function HygeinePromise() {
         </p>
 
         {/* Promise box */}
-        <div className="bg-[#86868652]  md:max-w-[50%] gap-4 flex flex-col mt-6  px-8 py-8 items-start rounded-3xl">
-          <h1 className="font-[700px] text-[32px] leading-[39.01px] text-center md:text-left">
+        <div className="bg-[#86868652]  lg:max-w-[50%] gap-4 flex flex-col mt-6 text-start  px-8 py-8  rounded-3xl">
+          <h1 className="font-[700px] text-[32px] leading-[39.01px] ">
             OUR PROMISE
           </h1>
           <ul className="flex primary-p flex-col gap-2">

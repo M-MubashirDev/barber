@@ -101,7 +101,7 @@ function ContactUs() {
           ></textarea>
           <button
             type="submit"
-            className="bg-white text-black font-medium py-2 px-4 rounded-lg hover:bg-gray-200"
+            className="bg-white text-brown-primary font-medium py-2 px-4 rounded-lg hover:bg-gray-200"
           >
             Submit
           </button>

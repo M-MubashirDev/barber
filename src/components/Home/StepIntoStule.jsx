@@ -1,6 +1,6 @@
 function StepIntoStule() {
   return (
-    <section className="bg-brown-primary p-4 text-center md:text-start  pb-8 ">
+    <section className="bg-brown-primary p-4 text-center lg:text-start  pb-8 ">
       <div className="flex flex-col min-h-fit max-w-[1440px] mx-auto w-[90%]  gap-8 lg:gap-2">
         <div className="bg-white md:max-w-[75%] rounded-[20px] max-w-fit  max-h-fit   p-4  self-center justify-self-center lg:translate-y-[-50%]   ">
           <div className="flex">
@@ -25,7 +25,7 @@ function StepIntoStule() {
             className="lg:max-w-[40%] w-min"
             alt="logo styles"
           />
-          <div className="ml-8 p-6">
+          <div className="md:ml-8  py-6 px-4 md:px-6">
             <div className="text-brown-primary  ">
               <p className="italic-p">WHERE EVERY CUT TELLS A STORY</p>
               <h1 className=" border-brown-primary h1-heading inline-block  mb-8 pb-6 mt-1 border-b-[5px]   ">

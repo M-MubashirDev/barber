@@ -12,7 +12,7 @@ function FooterText({ children }) {
 // Heading Component
 function FooterTextHeading({ children }) {
   return (
-    <h1 className="md:font-[700]  font-[500] tracking-[0.2em] max-w-fit mb-[10px] md:text-2xl text-[18px]  text-left underline decoration-white underline-offset-[8px] decoration-[1px] leading-[29.26px]">
+    <h1 className="md:font-[700]  font-[500]  tracking-[0.2em] max-w-fit mb-[10px] md:text-xl text-[16px] sm:text-[20px] text-left underline decoration-white underline-offset-[8px] decoration-[1px] leading-[29.26px]">
       {children}
     </h1>
   );
@@ -22,7 +22,7 @@ function FooterTextHeading({ children }) {
 // ListItem Component
 function FooterTextListItem({ children }) {
   return (
-    <li className="sm:font-semibold font-normal sm:text-[17px] text-[14px] leading-[24.38px]">
+    <li className="sm:font-normal md:font-[500px] lg:font-semibold font-normal sm:text-[17px] text-[12px] leading-[24.38px]">
       {children}
     </li>
   );

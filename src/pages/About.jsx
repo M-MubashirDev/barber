@@ -11,18 +11,18 @@ function About() {
           }}
           className="bg-no-repeat bg-cover  uppercase object-center  text-white"
         >
-          <div className="max-w-full    mx-auto w-[90%] md:py-[70px] py-10 flex md:text-left text-center  flex-col justify-center md:px-4">
-            <p className="md:text-[32px] text-[18px]   sm:text-[20px]  font-medium leading-[26px] sm:leading-[39.01px]  decoration-skip-ink-none ">
+          <div className="max-w-full  px-4   mx-auto w-[90%] md:py-[70px] py-10 flex md:text-left text-center  flex-col justify-center md:px-4">
+            <p className="md:text-[32px] text-[18px] text-center lg:text-start   sm:text-[20px]  font-medium leading-[26px] sm:leading-[39.01px]  decoration-skip-ink-none ">
               about us
             </p>
-            <h1 className="lg:text-[64px] inline-block md:text-[50px] sm:text-[32px] text-[28px] font-bold leading-[78.02px]     decoration-skip-ink-none ">
+            <h1 className="lg:text-[64px] inline-block text-center lg:text-start md:text-[50px] sm:text-[32px] text-[20px] font-bold leading-[78.02px]     decoration-skip-ink-none ">
               More Than a Barbershop{" "}
               <span className="md:block">It’s Your Space</span>
             </h1>
           </div>
         </section>
         <section className="py-10 ">
-          <div className=" flex flex-col gap-16 max-w-full mx-auto  w-[90%]">
+          <div className=" flex flex-col gap-16 max-w-full mx-auto px-4  w-[90%]">
             <div className="flex flex-col-reverse   gap-6 lg:flex-row lg:text-start text-center justify-center items-center lg:gap-12 ">
               <img
                 src="children-hairdresser-cutting.webp"
@@ -30,7 +30,7 @@ function About() {
                 alt="cutting hairs"
               />
               <div>
-                <h1 className="mb-6  h1-heading text-brown-primary">
+                <h1 className="mb-6  h1-heading  text-brown-primary">
                   Welcome to Bloomington’s Favorite Barbershop
                 </h1>
                 <p className="primary-p">
@@ -79,8 +79,8 @@ function About() {
             </div>
           </div>
         </section>
-        <section className="bg-brown-primary  py-12">
-          <div className="bg-white max-w-full flex text-center  items-center justify-center gap-4 flex-col p-10 mx-auto w-[90%]">
+        <section className="bg-brown-primary  py-12 px-4">
+          <div className="bg-white max-w-full flex text-center  items-center justify-center gap-4 flex-col p-10  mx-auto w-[90%]">
             <h1 className="h1-heading text-brown-primary ">
               More Than a Barbershop
             </h1>
@@ -90,14 +90,14 @@ function About() {
               every service, we’re building more than great haircuts—we’re
               building a community.
             </p>
-            <div className="sm:min-w-[35%] min-w-1 bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
+            <div className="md:min-w-[35%] min-w-[70%] bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
             <div className="flex flex-col text-center lg:text-start lg:flex-row items-center justify-center gap-12">
               <img src="aboutsome.webp" alt="about tools" />
               <div>
                 <h1 className="text-brown-primary mb-4 h1-heading">
                   Your Experience Matters
                 </h1>
-                <p className="primary-p">We focus on:</p>
+                <p className="primary-p text-start">We focus on:</p>
                 <ul className="primary-p ml-2 text-start -space-y-3  ">
                   <li className="about-bullet ">
                     A clean and welcoming environment.
