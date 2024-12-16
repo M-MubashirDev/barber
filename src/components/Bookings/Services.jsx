@@ -16,6 +16,7 @@ function Services() {
   const [obj, setObj] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+  //calc total time in mins
   function SumNum(number) {
     if (!Number.isNaN(Number(number))) return Number(number);
     const hourMatch = number.match(/(\d+)\s*hour/);
@@ -24,6 +25,8 @@ function Services() {
     const min = minMatch ? parseInt(minMatch) : 0;
     return hour * 60 + min;
   }
+
+  //calculattion totals
   function Clicking(val) {
     // Calculate the new values
     let newSelectedIds, newTotalPrice, newTotalTime;
@@ -50,14 +53,16 @@ function Services() {
       totalTime: newTotalTime,
     });
   }
+  //onChoose time
   function submitServer() {
     if (!currentSelectedId.length) return;
     navigate("time");
   }
+  //abstracting the selected services
   const oderSummery = serviceData?.filter((val) =>
     obj?.currentSelectedId?.includes(val._id)
   );
-  ///serssion storage
+  //set it in the session storage
   sessionStorage.setItem(
     "selectedServices",
     JSON.stringify({ oderSummery, obj })

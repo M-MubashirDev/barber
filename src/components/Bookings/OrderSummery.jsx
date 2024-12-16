@@ -13,10 +13,10 @@ function OrderSummery() {
     ?.filter((val) => val._id === id)
     .at(0);
   const { name, image } = currentProfessionals;
-  console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
+  // console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
 
   return (
-    <div className="min-h-[50vh] flex flex-col   my-14 px-4 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
+    <div className="min-h-[70vh] flex flex-col   my-14 px-4 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
       <h1 className="font-semibold text-[32px] mb-6 text-center text-brown-primary leading-[39.01px]">
         Order Summary
       </h1>

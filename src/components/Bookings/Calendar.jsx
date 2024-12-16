@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-const CalendarComp = () => {
+const CalendarComp = ({ inquiries }) => {
+  console.log(inquiries);
   const [currentDate] = useState(new Date());
   const [selectedMonth, setSelectedMonth] = useState("current"); // Tracks which month is currently selected
 
