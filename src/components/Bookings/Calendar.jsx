@@ -59,7 +59,7 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
           result.push(daysOrder[i]);
         }
       } else {
-        // Wrap-around scenario
+        // Handle wrap-around
         for (let i = startIndex; i < daysOrder.length; i++) {
           result.push(daysOrder[i]);
         }
@@ -236,78 +236,79 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
         </button>
       </div>
 
-      {/* Days of the Week */}
+      {/* Wrap days and dates in the same scroll container */}
       <div className="overflow-x-auto">
-        <div className="grid grid-cols-7 gap-2 mb-4 min-w-[500px]">
-          {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-            <div
-              key={day}
-              className="font-medium text-sm sm:text-base leading-[19.5px] text-gray-700 text-center whitespace-nowrap"
-            >
-              {day}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Dates */}
-      <div className="overflow-x-auto">
-        <div className="grid grid-cols-7 gap-4 min-w-[500px]">
-          {calendarDays.map((day, index) => {
-            if (day === null) {
-              return <div key={index}></div>;
-            }
-
-            const dateObj = new Date(year, monthIndex, day);
-            const dayAbbreviation = getDayAbbreviation(year, monthIndex, day);
-            const isToday = day === todayDate;
-            const isBeforeToday = isCurrentMonth && day < todayDate;
-            const isAfterToday = isCurrentMonth && day > todayDate;
-            const isNextMonth = selectedMonth === "next";
-            const isWorkingDay = workingDay.includes(dayAbbreviation);
-
-            // Check if selectedDay matches this date
-            const isSelectedDay = selectedDay === dateObj.toDateString();
-
-            let dateStyle =
-              "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
-
-            if (isToday) {
-              dateStyle += " bg-[#523939] text-white";
-            } else if (isSelectedDay) {
-              dateStyle += " bg-blue-300 text-black";
-            } else if (isBeforeToday) {
-              dateStyle += " bg-[#EAEAEA] text-black";
-            } else if (isAfterToday || isNextMonth) {
-              dateStyle +=
-                " bg-white border-[0.5px] border-[#523939] text-black";
-            } else {
-              dateStyle += " bg-transparent text-black";
-            }
-
-            if (isWorkingDay && (isToday || isAfterToday || isNextMonth)) {
-              dateStyle += " cursor-pointer hover:bg-blue-200";
-            } else {
-              dateStyle += " cursor-not-allowed opacity-50";
-            }
-
-            return (
+        <div className="min-w-[500px]">
+          {/* Days of the Week */}
+          <div className="grid grid-cols-7 gap-2 mb-4">
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div
-                key={index}
-                className={dateStyle}
-                onClick={() => {
-                  if (
-                    isWorkingDay &&
-                    (isToday || isAfterToday || isNextMonth)
-                  ) {
-                    onClickDay(dayAbbreviation, day, dateObj);
-                  }
-                }}
+                key={day}
+                className="font-medium text-sm sm:text-base leading-[19.5px] text-gray-700 text-center whitespace-nowrap"
               >
                 {day}
               </div>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Dates */}
+          <div className="grid grid-cols-7 gap-4">
+            {calendarDays.map((day, index) => {
+              if (day === null) {
+                return <div key={index}></div>;
+              }
+
+              const dateObj = new Date(year, monthIndex, day);
+              const dayAbbreviation = getDayAbbreviation(year, monthIndex, day);
+              const isToday = day === todayDate;
+              const isBeforeToday = isCurrentMonth && day < todayDate;
+              const isAfterToday = isCurrentMonth && day > todayDate;
+              const isNextMonth = selectedMonth === "next";
+              const isWorkingDay = workingDay.includes(dayAbbreviation);
+
+              // Check if selectedDay matches this date
+              const isSelectedDay = selectedDay === dateObj.toDateString();
+
+              let dateStyle =
+                "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
+
+              if (isToday) {
+                dateStyle += " bg-[#523939] text-white";
+              } else if (isSelectedDay) {
+                dateStyle += " bg-blue-300 text-black";
+              } else if (isBeforeToday) {
+                dateStyle += " bg-[#EAEAEA] text-black";
+              } else if (isAfterToday || isNextMonth) {
+                dateStyle +=
+                  " bg-white border-[0.5px] border-[#523939] text-black";
+              } else {
+                dateStyle += " bg-transparent text-black";
+              }
+
+              if (isWorkingDay && (isToday || isAfterToday || isNextMonth)) {
+                dateStyle += " cursor-pointer hover:bg-blue-200";
+              } else {
+                dateStyle += " cursor-not-allowed opacity-50";
+              }
+
+              return (
+                <div
+                  key={index}
+                  className={dateStyle}
+                  onClick={() => {
+                    if (
+                      isWorkingDay &&
+                      (isToday || isAfterToday || isNextMonth)
+                    ) {
+                      onClickDay(dayAbbreviation, day, dateObj);
+                    }
+                  }}
+                >
+                  {day}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
