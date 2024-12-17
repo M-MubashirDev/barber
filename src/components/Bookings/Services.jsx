@@ -71,7 +71,7 @@ function Services() {
   if (!id) navigate("/");
   if (isPending) return <Spinner />;
   return (
-    <section className=" font-extrabold px-4 text-[48px] max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
+    <section className=" font-extrabold px-4  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
       {/* <div className="justify-center place-content-center gap-3  grid lg:grid-cols-[80%_18rem] md:grid ">
        */}
       <div className="flex flex-col items-center lg:items-start lg:flex-row ">

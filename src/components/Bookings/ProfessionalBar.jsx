@@ -17,7 +17,7 @@ function ProfessionalBar({ data }) {
   return (
     <div
       onClick={handleClick}
-      className={`uppercase flex   items-center gap-6 cursor-pointer border-[#4F4F4F] border-[0.5px] hover:bg-[#523939] hover-styling hover:text-white rounded-[100px] px-2 py-2 
+      className={`uppercase flex   items-center sm:gap-6 gap-2 cursor-pointer border-[#4F4F4F] border-[0.5px] hover:bg-[#523939] hover-styling hover:text-white rounded-[100px] px-2 py-2 
         ${isActive ? "bg-[#523939] text-white" : ""}`} // Apply styles based on active state
     >
       <img

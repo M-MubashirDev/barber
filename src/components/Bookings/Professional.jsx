@@ -13,7 +13,7 @@ function Professional() {
       <LinksBar />
       <h1 className="booking-h1">Choose a professional</h1>
       {professionData ? (
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {professionData?.map((val) => (
             <ProfessionalBar data={val} key={val._id} />
           ))}
