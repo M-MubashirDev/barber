@@ -4,9 +4,8 @@ import Duration from "./Duration";
 import LinksBar from "./LinksBar";
 import OrderSummery from "./OrderSummery";
 import { useServices } from "./Hooks/useServices";
-import Spinner from "../Spinner";
+import Spinner from "../UI/Spinner";
 import { useState } from "react";
-// import { useContextMain } from "./Hooks/useContext";
 
 function Services() {
   const { serviceData, isPending } = useServices();
@@ -67,7 +66,7 @@ function Services() {
     "selectedServices",
     JSON.stringify({ oderSummery, obj })
   );
-
+  console.log("separatedServices:", oderSummery, "totalServices", obj);
   if (!id) navigate("/");
   if (isPending) return <Spinner />;
   return (
@@ -89,7 +88,12 @@ function Services() {
           </div>
           <button
             onClick={submitServer}
-            className="font-semibold mt-8  bg-brown-primary min-w-52 min-h-12 text-[16px] leading-[19.5px] rounded-[10px] text-white"
+            disabled={!(currentSelectedId.length && oderSummery)}
+            className={`font-semibold mt-8  bg-brown-primary ${
+              currentSelectedId.length && oderSummery
+                ? "cursor-pointer"
+                : "cursor-not-allowed"
+            } min-w-52 min-h-12 text-[16px] leading-[19.5px] rounded-[10px] text-white`}
           >
             CHOOSE TIME
           </button>

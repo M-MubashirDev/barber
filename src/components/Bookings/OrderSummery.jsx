@@ -3,11 +3,16 @@ import { useParams } from "react-router-dom";
 // import { Tips, TipsInput } from "./Tips";
 
 /* eslint-disable react/prop-types */
-function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
-  const [tip, setTip] = useState("");
-  const [finalTip, setFinalTip] = useState("");
-  const [tipId, setTipId] = useState("");
-  const [tipDollar, setTipDollar] = useState("");
+function OrderSummery({
+  reservationsData,
+  setReservationData,
+  onOpen,
+  formatTime12Hour,
+}) {
+  const [tip, setTip] = useState(""); //it only select the tip from the form field
+  const [finalTip, setFinalTip] = useState(""); // the final tip it can be from btn or from field
+  const [tipId, setTipId] = useState(""); // current selected tip id
+  const [tipDollar, setTipDollar] = useState(0); // converted finaltip into the dollars
   const { id } = useParams();
   const {
     obj: { totalPrice, totalTime },
@@ -16,7 +21,7 @@ function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
   const professinols = JSON.parse(sessionStorage.getItem("professionaldata"));
   const currentProfessionals = professinols
     ?.filter((val) => val._id === id)
-    .at(0);
+    .at(0); // filter current professional
   const { name, image } = currentProfessionals;
   // console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
   function TipInMoney(tip) {
@@ -39,11 +44,21 @@ function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
 
     console.log(finalTip);
   }
+  function summerySubmit() {
+    onOpen(true);
+    setReservationData({
+      ...reservationsData,
+      subTotal: totalPrice,
+      grandTotal: totalPrice + tipDollar,
+      tip: tipDollar,
+    });
+    console.log(reservationsData);
+  }
   useEffect(() => {
-    console.log(finalTip, tipDollar, tipId);
-  }, [finalTip, tipId, tipDollar]);
+    console.log(finalTip, tipDollar, reservationsData, tipId);
+  }, [finalTip, tipId, tipDollar, reservationsData]);
   return (
-    <div className="min-h-[70vh] flex flex-col gap-2   my-14 px-4 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
+    <div className="min-h-[70vh] flex flex-col gap-2   my-14 pl-4 pr-6 shadow-lg  md:pl-6 md:pr-8 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
       <h1 className="font-semibold text-[32px] mb-6 text-center text-brown-primary leading-[39.01px]">
         Order Summary
       </h1>
@@ -79,23 +94,23 @@ function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
           {totalTime} Min
         </p>
       </div>
-      {reservationsData?.selectedDate && (
+      {reservationsData?.date && (
         <div className="mb-2">
           <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
             Date:
           </p>
           <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
-            {reservationsData.selectedDate}
+            {reservationsData.date}
           </p>
         </div>
       )}
-      {reservationsData?.startTime && (
+      {reservationsData?.time && (
         <div className="mb-2">
           <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
             Time:
           </p>
           <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
-            {formatTime12Hour(reservationsData.startTime)}
+            {formatTime12Hour(reservationsData.time)}
           </p>
         </div>
       )}
@@ -109,35 +124,37 @@ function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
           </p>
         </div>
       )}
-      <div className="flex mb-2  justify-evenly">
-        {["20", "25", "30", "35", "40"].map((val) => (
-          <>
-            <button
-              onClick={() => tipButtonSubmit(val)}
-              className={` font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex  justify-center items-center rounded-[50%]  sm:text-sm text-[12px]  ${
-                tipId === val
-                  ? "bg-brown-primary text-white"
-                  : "bg-white text-brown-primary"
-              }`}
-            >
-              {val}%
-            </button>
-          </>
-        ))}
-        <form onSubmit={tipSubmit}>
-          <input
-            type="number"
-            placeholder="_%"
-            className="bg-white font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex   justify-center items-center rounded-[50%] sm:text-sm text-[12px] placeholder:text-brown-primary  
+      {reservationsData?.time && (
+        <div className="flex mb-2  justify-evenly">
+          {["20", "25", "30", "35", "40"].map((val) => (
+            <>
+              <button
+                onClick={() => tipButtonSubmit(val)}
+                className={` font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex  justify-center items-center rounded-[50%]  sm:text-sm text-[12px]  ${
+                  tipId === val
+                    ? "bg-brown-primary text-white"
+                    : "bg-white text-brown-primary"
+                }`}
+              >
+                {val}%
+              </button>
+            </>
+          ))}
+          <form onSubmit={tipSubmit}>
+            <input
+              type="number"
+              placeholder="_%"
+              className="bg-white font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex   justify-center items-center rounded-[50%] sm:text-sm text-[12px] placeholder:text-brown-primary  
     [appearance:textfield]
      [&::-webkit-inner-spin-button]:appearance-none
     [&::-webkit-outer-spin-button]:appearance-none
     [-moz-appearance:textfield]"
-            value={tip}
-            onChange={(e) => setTip(e.target.value)}
-          />
-        </form>
-      </div>
+              value={tip}
+              onChange={(e) => setTip(e.target.value)}
+            />
+          </form>
+        </div>
+      )}
       <div className="flex flex-col  items-center pt-12  text-brown-primary mt-auto ">
         <div className="flex justify-between items-center min-w-full">
           <h2 className="font-bold text-[20px] leading-[24.38px]">Sub TOTAL</h2>
@@ -145,12 +162,14 @@ function OrderSummery({ reservationsData, onOpen, formatTime12Hour }) {
             ${tipDollar ? totalPrice + tipDollar : totalPrice}
           </span>
         </div>
-        <button
-          onClick={() => onOpen(true)}
-          className="bg-brown-primary rounded-[10px] min-w-full h-12 mt-4 text-white text-[16px] leading-[19.5px] font-semibold"
-        >
-          Proceed To Payment
-        </button>
+        {reservationsData?.time && (
+          <button
+            onClick={() => summerySubmit()}
+            className="bg-brown-primary rounded-[10px] min-w-full h-12 mt-4 text-white text-[16px] leading-[19.5px] font-semibold"
+          >
+            Proceed To Payment
+          </button>
+        )}
       </div>
     </div>
   );

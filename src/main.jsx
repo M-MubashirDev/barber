@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorBoundaryHandle from "./components/ErrorBoundaryHandle.jsx";
+import ErrorBoundaryHandle from "./components/UI/ErrorBoundaryHandle.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

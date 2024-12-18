@@ -10,8 +10,8 @@ function Testimonial() {
           vibe. From the friendly banter to the perfect playlist, we make your
           time in the chair more than a service—it’s a break from the world.
         </p>
-        <h2 className="text-white sm:text-2xl md:text-3xl text-center font-bold text-[32px] leading-[39.01px] mb-4">
-          What Clients Say
+        <h2 className="text-white lg:mt-16 md:mt-10 sm:mt-8  sm:text-2xl md:text-3xl text-center font-bold text-[32px] leading-[39.01px] mb-4">
+          WHAT CLIENTS SAY
         </h2>
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Top Row Testimonials */}

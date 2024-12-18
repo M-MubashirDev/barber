@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function PerfectMatch() {
+  const navigate = useNavigate();
   return (
     <section className="bg-white py-6 ">
       <div className="max-w-[1440px] py-6 px-4  flex flex-col gap-12 justify-center items-center mx-auto w-full md:w-[90%]">
@@ -19,9 +20,20 @@ function PerfectMatch() {
         </div>
 
         {/* Button and description */}
-        <div className="flex flex-col lg:flex-row py-2 px-4 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
-          <button className="border border-white hover:border-[#f5f5f5] rounded-[20px] px-12  hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling py-2">
-            <NavLink to="/bookings">Book Now</NavLink>
+        <div className="flex flex-col lg:flex-row py-1 pl-1 pr-3 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
+          {/* <button
+            onClick={() => navigate("/bookings")}
+            className="border  border-white hover:border-[#f5f5f5] hover:font-[570px] rounded-[15px] mr-1 px-12  hover:bg-[#4b2e2e]  hover-styling py-2"
+          >
+            Book Now
+          </button> */}
+          <button
+            onClick={() => navigate("/bookings")}
+            className="relative font-montserrat  inline-flex items-center justify-center  overflow-hidden mr-1 tracking-tighter  group  sm:place-self-center lg:place-self-start    text-[14px] sm:text-[16px] w-[12rem] h-11 bg-brown-primary text-white hover:bg-[#4b2e2e]   hover-styling border rounded-[15px]  border-white"
+          >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#4b2e2e]  rounded-full group-hover:w-72 group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent "></span>
+            <span className="relative"> Book Now</span>
           </button>
           <p className="text-center  md:text-left">
             To lock in your favorite barber and get ready to turn heads
@@ -50,12 +62,32 @@ function PerfectMatch() {
         </div>
 
         {/* Call to action section */}
-        <button className="border border-brown-primary uppercase hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling text-brown-primary py-2 px-8 lg:px-32 md:px-28 rounded-[10px] text-center md:text-center font-semibold text-base leading-[19.5px]">
-          <NavLink to="/bookings">
-            CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
-            &gt;
-          </NavLink>
+        <button
+          onClick={() => navigate("/bookings")}
+          className="border border-brown-primary uppercase 
+         hover:bg-[#4b2e2e] hover:text-[#f5f5f5] 
+         text-brown-primary 
+         py-2 px-8 lg:px-32 md:px-28 
+         rounded-[10px] text-center font-semibold 
+         text-base leading-[19.5px] 
+        "
+        >
+          CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
+          --&gt;
         </button>
+        {/* <button
+          onClick={() => navigate("/bookings")}
+          className="relative mx-auto flex items-center justify-center overflow-hidden tracking-tighter group sm:place-self-center text-[16px] sm:text-[16px] w-[12rem] h-10 bg-white leading-[19.5px] border border-brown-primary uppercase 
+  hover:bg-[#4b2e2e] hover:text-[#f5f5f5] text-brown-primary 
+    lg:w-[70%]  text-center font-semibold rounded-[10px] transition-all duration-500 ease-out"
+        >
+          <span className="absolute w-0 h-0 transition-all duration-[750ms] ease-in-out bg-[#4b2e2e] rounded-full group-hover:w-72 group-hover:h-56"></span>
+          <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent"></span>
+          <span className="relative z-10">
+            CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU
+            --&gt;
+          </span>
+        </button> */}
       </div>
     </section>
   );

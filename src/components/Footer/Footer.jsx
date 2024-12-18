@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Footer({ children }) {
   return (
@@ -26,9 +26,18 @@ function Para({ children }) {
   );
 }
 function Button({ children }) {
+  const navigate = useNavigate();
   return (
-    <button className="sm:font-[600] font-[500] px-2 hover:bg-[#4b2e2e] hover:text-[#f5f5f5] hover-styling  leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[14px] sm:text-[16px]  min-h-12 md:min-w-[70%]">
-      <NavLink to="/bookings">{children} &gt;</NavLink>
+    <button
+      onClick={() => navigate("/bookings")}
+      className="relative sm:font-[600] font-[500] px-2 leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[14px] sm:text-[16px] min-h-12 md:min-w-[70%] overflow-hidden group shadow-md"
+    >
+      {/* Expanding Background Effect */}
+      <span className="absolute inset-0 w-0 h-0 transition-all duration-500 ease-in-out bg-[#3f2626] rounded-[8px] group-hover:w-full group-hover:h-full"></span>
+      {/* Shadow Effect on Hover */}
+      <span className="absolute inset-0 rounded-[8px] transition-shadow duration-500 ease-in-out group-hover:shadow-lg"></span>
+      {/* Text Content */}
+      <span className="relative z-10">{children} &gt;</span>
     </button>
   );
 }

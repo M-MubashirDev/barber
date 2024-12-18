@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useContect } from "../components/Contextus/useContect";
-import Spinner from "../components/Spinner";
+import Spinner from "../components/UI/Spinner";
 
 function ContactUs() {
   const { postContect, isPending } = useContect();

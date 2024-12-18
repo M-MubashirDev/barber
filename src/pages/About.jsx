@@ -12,10 +12,10 @@ function About() {
           className="bg-no-repeat bg-cover  uppercase object-center  text-white"
         >
           <div className="max-w-full  px-4   mx-auto w-[90%] md:py-[70px] py-10 flex md:text-left text-center  flex-col justify-center md:px-4">
-            <p className="md:text-[32px] text-[18px] text-center lg:text-start   sm:text-[20px]  font-medium leading-[26px] sm:leading-[39.01px]  decoration-skip-ink-none ">
+            <p className="md:text-[32px] text-[18px] text-center lg:text-start  leading-1  sm:text-[20px]  font-medium md:leading-[26px] sm:leading-[20.01px]  decoration-skip-ink-none ">
               about us
             </p>
-            <h1 className="lg:text-[64px] inline-block text-center lg:text-start md:text-[50px] sm:text-[32px] text-[20px] font-bold leading-[78.02px]     decoration-skip-ink-none ">
+            <h1 className="lg:text-[64px] inline-block text-center lg:text-start md:text-[50px] sm:text-[32px] text-[20px] font-bold leading-10 sm:lead-[44px] md:leading-[78.02px]     decoration-skip-ink-none ">
               More Than a Barbershop{" "}
               <span className="md:block">It’s Your Space</span>
             </h1>
@@ -91,9 +91,9 @@ function About() {
               building a community.
             </p>
             <div className="md:min-w-[35%] min-w-[70%] bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
-            <div className="flex flex-col text-center lg:text-start lg:flex-row items-center justify-center gap-12">
+            <div className="flex flex-col text-center lg:text-start xl:flex-row items-center justify-center gap-12">
               <img src="aboutsome.webp" alt="about tools" />
-              <div>
+              <div className="text-center">
                 <h1 className="text-brown-primary mb-4 h1-heading">
                   Your Experience Matters
                 </h1>

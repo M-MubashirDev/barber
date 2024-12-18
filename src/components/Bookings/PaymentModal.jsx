@@ -1,6 +1,29 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { createPortal } from "react-dom";
-
+// {
+//   firstName,
+//   lastName,
+//   address,
+//   zipCode,
+//   country,
+//   phone,
+//   email,
+//   amount,
+//   cardNumber,        // Sensitive information
+//   expirationDate,    // Sensitive information
+//   cvv,               // Sensitive information
+//   city,
+//   state,
+//   date,              // Appointment date
+//   time,              // Appointment time
+//   professional,      // Professional ID
+//   services,          // Array of Service IDs
+//   tip,               // Optional tip
+//   subTotal,          // Total cost of selected services
+//   grandTotal,        // subTotal + Tip
+//   totalServiceTime,  // Formatted time (e.g., "2 hours 30 minutes")
+// }
 const PaymentModal = ({ isOpen, onClose, amount }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");

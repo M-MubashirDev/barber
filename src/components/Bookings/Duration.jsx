@@ -4,6 +4,7 @@ import { useState } from "react";
 function Duration({ data, Clicking }) {
   const [isActive, setIsActive] = useState(false);
   const { title, time, price } = data;
+
   // Toggle active state on click
   const handleClick = () => {
     setIsActive(!isActive);
@@ -14,22 +15,20 @@ function Duration({ data, Clicking }) {
     <button
       onClick={handleClick} // Add onClick event to toggle active state
       style={{ "--price": `"$${price}"` }}
-      className={`border-[0.5px] rounded-[20px] flex hover:hover-styling  relative max-w-80 sm:w-80 h-48 border-[#4F4F4F] 
+      className={`border-[0.5px] rounded-[20px] flex relative max-w-80 sm:w-80 h-48 border-[#4F4F4F] shadow-[0_4px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.12)] transition-shadow 
         ${isActive ? "bg-brown-primary text-white" : ""}`} // Apply active background color
     >
       <div
         className={`after:content-[var(--price)] after:text-center after:justify-center after:flex after:place-items-center  
-          after:w-[100px] after:min-h-10  after:absolute after:bottom-6 after:rounded-tl-[20px] after:rounded-bl-[20px] 
-          after:right-0 after:font-semibold after:text-[18px]  flex flex-col m-6 gap-3   text-start after:leading-[21.94px] 
+          after:w-[100px] after:min-h-10 after:absolute after:bottom-6 after:rounded-tl-[20px] after:rounded-bl-[20px] 
+          after:right-0 after:font-semibold after:text-[18px] flex flex-col m-6 gap-3 text-start after:leading-[21.94px] 
           ${
             isActive
               ? "after:bg-white after:text-brown-primary"
               : "after:bg-brown-primary after:text-white"
           }`} // Apply active text color
       >
-        <h2 className="font-semibold  text-[18px] leading-[21.94px]">
-          {title}
-        </h2>
+        <h2 className="font-semibold text-[18px] leading-[21.94px]">{title}</h2>
         <p className="uppercase font-semibold text-[18px] leading-[21.94px]">
           time:{" "}
           <span className="font-normal text-[18px] leading-[21.94px]">
