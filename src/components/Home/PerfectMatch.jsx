@@ -29,9 +29,9 @@ function PerfectMatch() {
           </button> */}
           <button
             onClick={() => navigate("/bookings")}
-            className="relative font-montserrat  inline-flex items-center justify-center  overflow-hidden mr-1 tracking-tighter  group  sm:place-self-center lg:place-self-start    text-[14px] sm:text-[16px] w-[12rem] h-11 bg-brown-primary text-white hover:bg-[#4b2e2e]   hover-styling border rounded-[15px]  border-white !shadow-brown-primary"
+            className="relative font-montserrat  inline-flex items-center justify-center  overflow-hidden mr-1 tracking-tighter  group  sm:place-self-center lg:place-self-start    text-[14px] sm:text-[16px] w-[12rem] h-11 bg-brown-primary text-white hover-white   hover-styling border rounded-[15px]  border-white "
           >
-            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#4b2e2e]  rounded-full group-hover:w-72 group-hover:h-56"></span>
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white  rounded-full group-hover:w-72 group-hover:h-56"></span>
             <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent "></span>
             <span className="relative"> Book Now</span>
           </button>
@@ -81,7 +81,7 @@ function PerfectMatch() {
   hover:bg-[#4b2e2e] hover:text-[#f5f5f5] text-brown-primary 
     lg:w-[70%]  text-center font-semibold rounded-[10px] transition-all duration-500 ease-out"
         >
-          <span className="absolute w-0 h-0 transition-all duration-[750ms] ease-in-out bg-[#4b2e2e] rounded-full !shadow-brown-primary group-hover:w-72 group-hover:h-56"></span>
+          <span className="absolute w-0 h-0 transition-all duration-[750ms] ease-in-out bg-[#4b2e2e] rounded-full group-hover:w-72 group-hover:h-56"></span>
           <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent"></span>
           <span className="relative z-10">
             CHECK OUT OUR FULL LIST OF BARBERS AND FIND THE PERFECT FIT FOR YOU

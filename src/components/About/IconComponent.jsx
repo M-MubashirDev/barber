@@ -1,7 +1,7 @@
 function IconComponent({ src, text }) {
   return (
     <div
-      className="text-brown-primary min-w-[calc(40vh)]
+      className="text-brown-primary min-w-[calc(70vw)]
  min-h-[12rem] md:min-w-[14rem] md:min-h-[13rem] gap-4 flex   justify-center items-center flex-col  border-[#523939] border-[0.5px]"
     >
       <img src={src} alt="listen icon" />

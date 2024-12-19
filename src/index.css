@@ -40,3 +40,6 @@ body {
 .hover-styling {
   @apply transition-all hover:shadow-lg shadow-brown-primary duration-300 ease-in-out delay-100;
 }
+.hover-white {
+  @apply hover:text-brown-primary hover:border-0 hover:border-none hover:bg-white hover:font-semibold hover:!shadow-brown-primary;
+}
