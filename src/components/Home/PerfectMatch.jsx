@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function PerfectMatch() {
   const navigate = useNavigate();
@@ -6,7 +6,7 @@ function PerfectMatch() {
     <section className="bg-white py-6 ">
       <div className="max-w-[1440px] py-6 px-4  flex flex-col gap-12 justify-center items-center mx-auto w-full md:w-[90%]">
         {/* Title and description */}
-        <div className="flex flex-col pt-12 lg:flex-row justify-center items-center gap-8 md:gap-12 text-center lg:text-left">
+        <div className="flex flex-col pt-12 lg:flex-row justify-center items-center gap-5 md:gap-8 lg:gap-12 text-center lg:text-left">
           <div className="text-brown-primary w-full">
             <p className="italic-p">PICK YOUR PERFECT MATCH</p>
             <h1 className="h1-heading">YOUR STYLE, YOUR BARBER</h1>
@@ -20,7 +20,7 @@ function PerfectMatch() {
         </div>
 
         {/* Button and description */}
-        <div className="flex flex-col lg:flex-row py-1 pl-1 pr-3 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
+        <div className="flex flex-col  lg:flex-row   py-4 px-3 lg:py-2 lg:px-2 pl-1 pr-3 items-center rounded-[20px] bg-brown-primary text-white gap-4 md:gap-1">
           {/* <button
             onClick={() => navigate("/bookings")}
             className="border  border-white hover:border-[#f5f5f5] hover:font-[570px] rounded-[15px] mr-1 px-12  hover:bg-[#4b2e2e]  hover-styling py-2"

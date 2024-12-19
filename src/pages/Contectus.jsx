@@ -48,7 +48,7 @@ function ContactUs() {
         backgroundImage: "url('contect.webp')",
         minHeight: "calc(100vh - 80.8px)",
       }}
-      className="bg-no-repeat flex flex-col text-center items-center justify-center bg-cover w-full"
+      className="bg-no-repeat flex py-20 flex-col text-center items-center justify-center bg-cover w-full"
     >
       <div className="text-white max-w-[1440px] flex flex-col items-center lg:items-start mx-auto w-[90%]">
         {/* Title */}
@@ -97,7 +97,7 @@ function ContactUs() {
             value={formValues.question}
             onChange={handleChange}
             placeholder="Question"
-            className="min-h-[5rem] outline-none bg-transparent border rounded-[6px] border-white py-2 px-4 sm:py-3 sm:px-6 placeholder-white"
+            className="min-h-[8rem] outline-none bg-transparent border rounded-[6px] border-white py-2 px-4 sm:py-3 sm:px-6 placeholder-white"
           ></textarea>
           <button
             type="submit"

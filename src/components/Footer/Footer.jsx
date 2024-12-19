@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 function Footer({ children }) {
   return (
-    <div className="max-w-[1440px] flex flex-col justify-center  items-center text-center gap-4 py-16 mx-auto w-[90%]">
+    <div className="max-w-[1440px] flex flex-col justify-center lg:pb-16  items-center text-center gap-4 pt-16 mx-auto w-[90%]">
       {children}
     </div>
   );
@@ -30,7 +30,7 @@ function Button({ children }) {
   return (
     <button
       onClick={() => navigate("/bookings")}
-      className="relative sm:font-[600] font-[500] px-2 leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[14px] sm:text-[16px] min-h-12 md:min-w-[70%] overflow-hidden group shadow-md"
+      className="relative sm:font-[600] font-[500] px-4 py-2 sm:px-8 sm:py-0 leading-[19.5px] text-white rounded-[8px] bg-brown-primary text-[12px] sm:text-[14px] md:text-[16px] min-h-12 md:min-w-[70%] overflow-hidden group shadow-md"
     >
       {/* Expanding Background Effect */}
       <span className="absolute inset-0 w-0 h-0 transition-all duration-500 ease-in-out bg-[#3f2626] rounded-[8px] group-hover:w-full group-hover:h-full"></span>

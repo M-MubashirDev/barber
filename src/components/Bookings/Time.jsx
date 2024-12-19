@@ -8,22 +8,22 @@ import { useTime } from "./Hooks/useTime";
 import PaymentModal from "./PaymentModal";
 
 function Time() {
-  const [isPayment, setIsPayment] = useState(false); //for main payment button
-  const { timeData, isPending } = useTime(); //getapi for the time data
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([]); //to get availble slots of time from the calendar
-  const [selectedDay, setSelectedDay] = useState(null); //the day user selected
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); //the current selected time slot
-  const [reservationsData, setReservationData] = useState({}); //the id,time select and end etc
+  const [isPayment, setIsPayment] = useState(false); // for main payment button
+  const { timeData, isPending } = useTime(); // get API for the time data
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]); // to get available slots of time from the calendar
+  const [selectedDay, setSelectedDay] = useState(null); // the day user selected
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); // the current selected time slot
+  const [reservationsData, setReservationData] = useState({}); // the id, time select and end etc
   const inquiries = timeData?.inquiries; //
-  const timeSlots = inquiries?.map((val) => val.timeSlots); //time slots that are not availble from backend
+  const timeSlots = inquiries?.map((val) => val.timeSlots); // time slots that are not available from backend
   const { id } = useParams();
 
   const navigate = useNavigate();
   const currentSelectedServices = JSON.parse(
-    //it gives two keys one selected serves and there total
+    // it gives two keys: one selected services and their total
     sessionStorage.getItem("selectedServices")
   );
-  const { obj } = currentSelectedServices || {}; //total of selected services
+  const { obj } = currentSelectedServices || {}; // total of selected services
   const { currentSelectedId, totalTime } = obj;
   const professionalData = JSON.parse(
     // data about the current professionals
@@ -37,7 +37,6 @@ function Time() {
   }, [navigate, obj]);
   const { image, name, _id } = professionalData;
   console.log(image, name, _id);
-  if (!obj || !Object.keys(obj).length || isPending) return <Spinner />;
 
   // Helper to convert 24-hour time to 12-hour AM/PM format
   function formatTime12Hour(time) {
@@ -60,7 +59,7 @@ function Time() {
 
     return `${hour}:${minute} ${suffix}`;
   }
-  // after the timeSlote is click
+  // After the timeSlot is clicked
   function SelectedTimeSlots({ idx, currentlyReserved }) {
     setSelectedTimeSlot(idx);
 
@@ -76,12 +75,16 @@ function Time() {
     // Here you can handle the reservation logic (e.g., API call)
   }
 
+  if (!obj || !Object.keys(obj).length || isPending) return <Spinner />;
   return (
-    <section className="font-extrabold text-[48px] pb-4 max-w-[1440px] justify-center items-center gap-3 flex lg:flex-row flex-col lg:justify-between mx-auto w-[90%] leading-[58.51px]">
-      <div className="max-w-fit flex flex-col justify-center">
+    <section className="font-extrabold text-[32px] pb-4 max-w-[1440px] flex flex-col lg:flex-row justify-between items-center gap-6 mx-auto w-full px-4 sm:px-6 lg:px-8 leading-[38px]">
+      {/* Left Side: Calendar and Professional Info */}
+      <div className="flex flex-col items-center lg:items-start w-full lg:w-2/3">
         <LinksBar />
-        <h1 className="booking-h1 ">Choose Date & Time</h1>
-        <div className="overflow-x-auto max-w-fit">
+        <h1 className="booking-h1 text-4xl sm:text-5xl lg:text-6xl text-center lg:text-left mb-6">
+          Choose Date & Time
+        </h1>
+        <div className="max-w-full">
           <CalendarComp
             timeSlots={timeSlots}
             select={{ selectedDay, setSelectedDay }}
@@ -89,34 +92,36 @@ function Time() {
             totalTime={obj.totalTime}
           />
         </div>
-        <div className="flex sm:flex-row flex-col md:place-content-start  sm:place-content-center  text-center sm:text-start  gap-2 items-center">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-4 mt-6">
           <img
             src={image}
-            className="rounded-[50%] max-h-20 h-20 w-20 max-w-20"
+            className="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover"
             alt="professional image"
           />
-          <div>
-            <h2 className="text-[24px] font-semibold leading-[29.26px]">
+          <div className="text-center sm:text-left">
+            <h2 className="text-2xl sm:text-3xl font-semibold leading-tight">
               {name}
             </h2>
-            <p className="md:text-[20px] sm:text-[16px] text-[14px]  font-semibold leading-[24.38px]">
-              Total Time Of your Services:{" "}
-              <span className="italic font-[500px]">{obj.totalTime} Min</span>
+            <p className="text-lg sm:text-xl font-semibold leading-snug mt-2">
+              Total Time Of Your Services:{" "}
+              <span className="italic font-medium">{obj.totalTime} Min</span>
             </p>
           </div>
         </div>
         {selectedDay && (
-          <div className="mt-6 ">
-            <h3 className="text-2xl font-bold mb-2">Available Times</h3>
+          <div className="mt-6  w-full">
+            <h3 className="text-2xl font-bold mb-4 text-center sm:text-left">
+              Available Times
+            </h3>
             {availableTimeSlots.length > 0 ? (
-              <ul className="grid max-w-fit sm:max-w-full   grid-cols-2 md:grid-cols-4 gap-2">
+              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {availableTimeSlots.map((slot, idx) => (
                   <li
                     key={idx}
-                    className={`border border-brown-primary px-4 py-2 mb-2 cursor-pointer rounded-[20px] text-center text-lg font-normal ${
+                    className={`border border-brown-primary px-4 py-2 cursor-pointer rounded-[20px] text-center text-lg font-normal transition-colors duration-200 ${
                       selectedTimeSlot === idx
                         ? "bg-brown-primary text-white"
-                        : "bg-white text-brown-primary"
+                        : "bg-white text-brown-primary hover:bg-brown-primary hover:text-white"
                     }`}
                     onClick={() =>
                       SelectedTimeSlots({
@@ -134,13 +139,16 @@ function Time() {
                 ))}
               </ul>
             ) : (
-              <p>No available time slots for this day.</p>
+              <p className="text-center sm:text-left text-gray-600">
+                No available time slots for this day.
+              </p>
             )}
           </div>
         )}
       </div>
 
-      <div className="max-w-fit justify-self-center min-h-[70vh] lg:w-auto mt-6 lg:mt-0">
+      {/* Right Side: Order Summary */}
+      <div className="lg:min-w-[30%] lg:justify-start lg:place-self-start">
         <OrderSummery
           onOpen={setIsPayment}
           setReservationData={setReservationData}
@@ -148,6 +156,8 @@ function Time() {
           formatTime12Hour={formatTime12Hour}
         />
       </div>
+
+      {/* Payment Modal */}
       {<PaymentModal isOpen={isPayment} onClose={setIsPayment} />}
     </section>
   );

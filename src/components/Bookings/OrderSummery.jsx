@@ -58,7 +58,7 @@ function OrderSummery({
     console.log(finalTip, tipDollar, reservationsData, tipId);
   }, [finalTip, tipId, tipDollar, reservationsData]);
   return (
-    <div className="min-h-[70vh] flex flex-col gap-2   my-14 pl-4 pr-6 shadow-lg  md:pl-6 md:pr-8 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
+    <div className="min-h-[80vh] flex flex-col gap-2   my-14 pl-4 pr-6 shadow-lg  md:pl-6 md:pr-8 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">
       <h1 className="font-semibold text-[32px] mb-6 text-center text-brown-primary leading-[39.01px]">
         Order Summary
       </h1>

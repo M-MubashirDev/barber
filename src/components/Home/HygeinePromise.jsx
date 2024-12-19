@@ -24,8 +24,8 @@ function HygeinePromise() {
         </p>
 
         {/* Promise box */}
-        <div className="bg-[#86868652] shadow-[0px_1px_4px_1px_#86868652] lg:max-w-[50%] gap-4 flex flex-col mt-6 text-start  px-8 py-8  rounded-3xl">
-          <h1 className="font-[700px] text-[32px] leading-[39.01px] ">
+        <div className="bg-[#86868652] text-center shadow-[0px_1px_4px_1px_#86868652] lg:max-w-[50%] gap-4 flex flex-col mt-6 md:text-start  px-8 py-8  rounded-3xl">
+          <h1 className="lg:font-[700px]  font-[600px] text-[24px] sm:text-[26px]  md:text-[28px] lg:text-[32px] leading-[39.01px] ">
             OUR PROMISE
           </h1>
           <ul className="flex primary-p flex-col gap-2">

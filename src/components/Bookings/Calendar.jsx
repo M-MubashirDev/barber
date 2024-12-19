@@ -210,7 +210,7 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
   return (
     <div className="min-w-full mx-auto bg-white rounded-lg p-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 items-center mb-6 overflow-x-auto">
+      <div className="flex flex-wrap justify-center gap-4 items-center mb-6 overflow-x-auto">
         <button
           onClick={() => handleMonthSelection("current")}
           className={`p-2 sm:p-3 border-[0.5px] border-[#523939] min-w-32 sm:min-w-64 rounded-[20px] transition duration-200 font-medium text-base sm:text-xl leading-normal ${
@@ -237,7 +237,7 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
       </div>
 
       {/* Wrap days and dates in the same scroll container */}
-      <div className="overflow-x-auto">
+      <div className="!overflow-x-auto">
         <div className="min-w-[500px]">
           {/* Days of the Week */}
           <div className="grid grid-cols-7 gap-2 mb-4">

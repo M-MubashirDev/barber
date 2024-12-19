@@ -5,7 +5,7 @@ function StepIntoStule() {
         <div className="bg-white md:max-w-[75%] rounded-[20px] max-w-fit  max-h-fit   p-4  self-center justify-self-center lg:translate-y-[-50%]   ">
           <div className="flex">
             <div className="sm:min-w-2 min-w-1 bg-brown-primary rounded-t-[10px] rounded-b-[10px] min-h-full mx-auto"></div>
-            <blockquote className="flex flex-col gap-5 text-xl  sm:text-2xl  pl-4 leading-[29.26px]   font-normal text-black ">
+            <blockquote className="flex flex-col gap-5 text-[18px] text-start  sm:text-2xl  pl-4 leading-[29.26px]   font-normal text-black ">
               From the moment I walked in, the vibe was welcoming and laid-back.
               My barber took the time to listen to exactly what I wanted,
               offering helpful suggestions along the way. The result? A perfect
@@ -28,7 +28,7 @@ function StepIntoStule() {
           <div className="md:ml-8  py-6 px-4 md:px-6">
             <div className="text-brown-primary  ">
               <p className="italic-p">WHERE EVERY CUT TELLS A STORY</p>
-              <h1 className=" border-brown-primary h1-heading inline-block  mb-8 pb-6 mt-1 border-b-[5px]   ">
+              <h1 className=" border-brown-primary h1-heading inline-block mb-6  md:mb-12  lg:mb-16  underline-offset-[8px] md:underline-offset-[25px] lg:underline-offset-[30px] mt-1  underline ">
                 STEP INTO STYLE
               </h1>
             </div>

@@ -6,6 +6,8 @@ function ProfessionalBar({ data }) {
   // Manage active state
   const [isActive, setIsActive] = useState(false);
   const { image, availability, name, _id } = data;
+  const { date, day } = availability[0] || {};
+  console.log(formatDate(date), day);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -13,6 +15,12 @@ function ProfessionalBar({ data }) {
     if (!_id) return;
     navigate(`services/${_id}`);
   };
+  function formatDate(isoString) {
+    const date = new Date(isoString);
+
+    const options = { day: "numeric", month: "short" };
+    return date.toLocaleDateString("en-US", options);
+  }
 
   return (
     <div
@@ -32,7 +40,7 @@ function ProfessionalBar({ data }) {
         <p className="font-semibold text-[14px] sm:text-[18px] leading-[24.38px] text-left">
           availabilty:
           <span className="italic font-medium text-left">
-            {availability}
+            {date && day ? `${day}, ${formatDate(date)}` : ""}
           </span>{" "}
         </p>
       </div>
