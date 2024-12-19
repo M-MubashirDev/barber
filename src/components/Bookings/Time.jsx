@@ -77,11 +77,11 @@ function Time() {
 
   if (!obj || !Object.keys(obj).length || isPending) return <Spinner />;
   return (
-    <section className="font-extrabold text-[32px] pb-4 max-w-[1440px] flex flex-col lg:flex-row justify-between items-center gap-6 mx-auto w-full px-4 sm:px-6 lg:px-8 leading-[38px]">
+    <section className="font-extrabold text-[32px]  max-w-[1440px] flex flex-col lg:flex-row justify-between py-6 items-center gap-6 mx-auto w-full px-4 sm:px-6 lg:px-8 leading-[38px]">
       {/* Left Side: Calendar and Professional Info */}
       <div className="flex flex-col items-center lg:items-start w-full lg:w-2/3">
         <LinksBar />
-        <h1 className="booking-h1 text-4xl sm:text-5xl lg:text-6xl text-center lg:text-left mb-6">
+        <h1 className="booking-h1 text-4xl sm:text-5xl lg:text-6xl text-center    lg:text-left mb-6">
           Choose Date & Time
         </h1>
         <div className="max-w-full">
@@ -99,7 +99,7 @@ function Time() {
             alt="professional image"
           />
           <div className="text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl font-semibold leading-tight">
+            <h2 className="text-2xl capitalize sm:text-3xl font-semibold leading-tight">
               {name}
             </h2>
             <p className="text-lg sm:text-xl font-semibold leading-snug mt-2">
@@ -110,8 +110,8 @@ function Time() {
         </div>
         {selectedDay && (
           <div className="mt-6  w-full">
-            <h3 className="text-2xl font-bold mb-4 text-center sm:text-left">
-              Available Times
+            <h3 className="text-2xl font-bold mb-4 text-center text-brown-primary sm:text-left">
+              Available Times:
             </h3>
             {availableTimeSlots.length > 0 ? (
               <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -139,7 +139,7 @@ function Time() {
                 ))}
               </ul>
             ) : (
-              <p className="text-center sm:text-left text-gray-600">
+              <p className="text-center text-brown-primary sm:text-left ">
                 No available time slots for this day.
               </p>
             )}

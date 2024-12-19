@@ -23,7 +23,7 @@ body {
 } */
 /* Booking  */
 .booking-h1 {
-  @apply uppercase font-[900]  text-center md:text-start text-3xl md:text-5xl text-brown-primary leading-[58.51px] mb-10 mt-2;
+  @apply uppercase font-[900]  text-center md:text-start text-3xl md:text-5xl text-brown-primary leading-[40px] md:leading-[50px] lg:leading-[58.51px] mb-10 mt-2;
 }
 /* primary */
 .primary-p {
@@ -37,9 +37,6 @@ body {
   @apply font-black   md:text-[40px] uppercase text-[28px] leading-[40px] md:leading-[48.76px];
 }
 
-.about-bullet::before {
-  @apply content-['•'] text-black text-3xl mr-4;
-}
 .hover-styling {
   @apply transition-all hover:shadow-lg shadow-brown-primary duration-300 ease-in-out delay-100;
 }

@@ -70,14 +70,14 @@ function Services() {
   if (!id) navigate("/");
   if (isPending) return <Spinner />;
   return (
-    <section className=" font-extrabold px-4  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
+    <section className=" font-extrabold px-4 py-10  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
       {/* <div className="justify-center place-content-center gap-3  grid lg:grid-cols-[80%_18rem] md:grid ">
        */}
-      <div className="flex flex-col items-center lg:items-start lg:flex-row ">
-        <div className="max-w-fit ">
+      <div className="flex flex-col items-center  lg:gap-8 justify-between lg:items-start lg:flex-row ">
+        <div className="max-w-fit flex flex-col lg:items-start items-center">
           <LinksBar />
           <h1 className="booking-h1">Choose Services</h1>
-          <div className="grid  lg:grid-cols-[20rem_20rem_20rem] md:grid-cols-[20rem_20rem]  gap-4 justify-start">
+          <div className="flex md:flex-row flex-col gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
             {serviceData.map((val) => (
               <Duration
                 key={val._id}
@@ -93,12 +93,12 @@ function Services() {
               currentSelectedId.length && oderSummery
                 ? "cursor-pointer"
                 : "cursor-not-allowed"
-            } min-w-52 min-h-12 text-[16px] leading-[19.5px] rounded-[10px] text-white`}
+            } min-w-52 min-h-12 text-[16px] max-w-fit leading-[19.5px] i rounded-[10px] text-white`}
           >
             CHOOSE TIME
           </button>
         </div>
-        <div className="min-w-fit  place-self-center">
+        <div className="lg:min-w-[30%] lg:justify-start lg:place-self-start">
           {currentSelectedId.length && oderSummery ? <OrderSummery /> : ""}
         </div>
       </div>

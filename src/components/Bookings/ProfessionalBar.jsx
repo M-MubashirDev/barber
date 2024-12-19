@@ -25,20 +25,25 @@ function ProfessionalBar({ data }) {
   return (
     <div
       onClick={handleClick}
-      className={`uppercase flex   items-center sm:gap-6 gap-2 shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.12)] transition-shadow  cursor-pointer border-[#4F4F4F] border-[0.5px] hover:bg-[#523939] hover-styling hover:text-white rounded-[100px] px-2 py-2 
-        ${isActive ? "bg-[#523939] text-white" : ""}`} // Apply styles based on active state
+      className={`relative uppercase flex items-center sm:gap-6 gap-2 hover:text-white  shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] transition-shadow cursor-pointer border-[#4F4F4F] border-[0.5px] rounded-[100px] px-2 py-2 overflow-hidden 
+      ${isActive ? "bg-[#523939] text-white" : "text-[#523939]"}
+      group`}
     >
+      {/* Pseudo-element for expanding background */}
+      <span className="absolute inset-0 bg-[#523939] scale-0 group-hover:scale-100 transition-transform duration-500 ease-in-out origin-center z-0"></span>
+
+      {/* Content */}
       <img
         src={image}
         alt="barber"
-        className="max-w-20 max-h-20 w-20 h-20 rounded-[50%]"
+        className="z-10 max-w-20 max-h-20 w-20 h-20 rounded-full object-cover"
       />
-      <div>
+      <div className="z-10">
         <p className="font-semibold text-[16px] sm:text-[20px] uppercase leading-[29.26px]">
           {name}
         </p>
         <p className="font-semibold text-[14px] sm:text-[18px] leading-[24.38px] text-left">
-          availabilty:
+          Availability:
           <span className="italic font-medium text-left">
             {date && day ? `${day}, ${formatDate(date)}` : ""}
           </span>{" "}

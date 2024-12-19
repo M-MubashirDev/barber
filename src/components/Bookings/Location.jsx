@@ -30,7 +30,7 @@ function Location() {
         </h2>
         <button
           onClick={() => navigate("professional")}
-          className="relative font-semibold uppercase md:text-[28px] text-[20px] sm:text-[22px] lg:text-[32px] max-w-fit p-6 mb-4 md:py-6 md:px-28 bg-brown-primary leading-[37.5px] rounded-[20px] text-white overflow-hidden group"
+          className="relative font-semibold uppercase md:text-[28px] text-[20px] sm:text-[22px] lg:text-[32px] max-w-fit p-6 mb-4 md:py-6 md:px-28 bg-brown-primary leading-[37.5px] rounded-[20px] text-white overflow-hidden group hover:!shadow-brown-primary"
         >
           {/* Expanding Background Effect */}
           <span className="absolute top-1/2 left-1/2 w-0 h-0 transition-all duration-700 ease-out bg-[#4b2e2e] rounded-full group-hover:w-[300%] group-hover:h-[300%] transform -translate-x-1/2 -translate-y-1/2"></span>

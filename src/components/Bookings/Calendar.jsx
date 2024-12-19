@@ -273,7 +273,7 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
                 "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
 
               if (isToday) {
-                dateStyle += " bg-[#523939] text-white";
+                dateStyle += " bg-[#523939] font-bold text-white";
               } else if (isSelectedDay) {
                 dateStyle += " bg-blue-300 text-black";
               } else if (isBeforeToday) {

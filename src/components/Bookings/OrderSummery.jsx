@@ -71,7 +71,9 @@ function OrderSummery({
           alt="barber"
           className="min-w-12 min-h-12 w-12 h-12   rounded-[50%]"
         />
-        <p className="font-semibold text-[16px] leading-[19.5px]">{name}</p>
+        <p className="font-semibold capitalize     text-[16px] leading-[19.5px]">
+          {name}
+        </p>
       </div>
       <p className="font-medium  text-brown-primary text-[20px] leading-[24.38px]">
         Services:

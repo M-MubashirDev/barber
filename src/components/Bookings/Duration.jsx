@@ -15,7 +15,7 @@ function Duration({ data, Clicking }) {
     <button
       onClick={handleClick} // Add onClick event to toggle active state
       style={{ "--price": `"$${price}"` }}
-      className={`border-[0.5px] rounded-[20px] flex relative max-w-80 sm:w-80 h-48 border-[#4F4F4F] shadow-[0_4px_8px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_12px_rgba(0,0,0,0.12)] transition-shadow 
+      className={`border-[0.5px] rounded-[20px] flex relative w-full h-48 border-[#4F4F4F] shadow-brown-primary hover:shadow-[1px_1px_10px_-2px_#0000007d] transition-shadow 
         ${isActive ? "bg-brown-primary text-white" : ""}`} // Apply active background color
     >
       <div
