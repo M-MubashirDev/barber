@@ -15,6 +15,12 @@ function Services() {
   const [obj, setObj] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+  const professionalServices = serviceData?.filter((service) =>
+    service.assignedProfessionals?.some(
+      (professional) => professional._id === id
+    )
+  );
+  console.log(professionalServices, serviceData, "asd");
   //calc total time in mins
   function SumNum(number) {
     if (!Number.isNaN(Number(number))) return Number(number);
@@ -66,11 +72,25 @@ function Services() {
     "selectedServices",
     JSON.stringify({ oderSummery, obj })
   );
-  console.log("separatedServices:", oderSummery, "totalServices", obj);
+  // console.log(
+  //   "separatedServices:",
+  //   oderSummery,
+  //   "totalServices",
+  //   obj,
+  //   serviceData
+  // );
   if (!id) navigate("/");
   if (isPending) return <Spinner />;
+  if (!professionalServices)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-white">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#523939] text-center px-4">
+          There are no services for this professional.
+        </h2>
+      </div>
+    );
   return (
-    <section className=" font-extrabold px-4 py-10  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
+    <section className="font-extrabold px-4 py-10  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
       {/* <div className="justify-center place-content-center gap-3  grid lg:grid-cols-[80%_18rem] md:grid ">
        */}
       <div className="flex flex-col items-center  lg:gap-8 justify-between lg:items-start lg:flex-row ">
@@ -78,7 +98,7 @@ function Services() {
           <LinksBar />
           <h1 className="booking-h1">Choose Services</h1>
           <div className="flex md:flex-row flex-col gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
-            {serviceData.map((val) => (
+            {professionalServices?.map((val) => (
               <Duration
                 key={val._id}
                 data={val}

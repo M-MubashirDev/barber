@@ -25,10 +25,8 @@ function OrderSummery({
   const { name, image } = currentProfessionals;
   // console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
   function TipInMoney(tip) {
-    if (!tip && totalPrice) return;
     const calc = (totalPrice / 100) * tip;
-    setTipDollar(calc);
-    console.log(tipDollar);
+    setTipDollar(calc.toFixed(1));
   }
   function tipSubmit(e) {
     e.preventDefault();
@@ -38,11 +36,16 @@ function OrderSummery({
     setTipId("");
   }
   function tipButtonSubmit(val) {
+    if (val == tipId) {
+      setFinalTip("");
+      setTipId("");
+      TipInMoney(0);
+      return;
+    }
+    console.log(val === tipId, val, tipId);
     setFinalTip(val);
     setTipId(val);
     TipInMoney(val);
-
-    console.log(finalTip);
   }
   function summerySubmit() {
     onOpen(true);
@@ -52,7 +55,6 @@ function OrderSummery({
       grandTotal: totalPrice + tipDollar,
       tip: tipDollar,
     });
-    console.log(reservationsData);
   }
   useEffect(() => {
     console.log(finalTip, tipDollar, reservationsData, tipId);
@@ -75,21 +77,23 @@ function OrderSummery({
           {name}
         </p>
       </div>
-      <p className="font-medium  text-brown-primary text-[20px] leading-[24.38px]">
-        Services:
-      </p>
-      {oderSummery?.map((val) => (
-        <React.Fragment key={val._id}>
-          <p className="font-medium text-[16px] mb-3  items-center flex flex-row    gap-1 md:gap-0 justify-between leading-[19.5px]">
-            <span>{val.title}</span>{" "}
-            <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
-              ${val.price}
-            </span>
-          </p>
-        </React.Fragment>
-      ))}
       <div className="mb-2">
-        <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
+        <p className="font-medium mb-1 text-brown-primary text-[20px] leading-[24.38px]">
+          Services:
+        </p>
+        {oderSummery?.map((val) => (
+          <React.Fragment key={val._id}>
+            <p className="font-medium text-[16px] mb-[2px]  items-center flex flex-row    gap-1 md:gap-0 justify-between leading-[19.5px]">
+              <span>{val.title}</span>{" "}
+              <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
+                ${val.price}
+              </span>
+            </p>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="mb-2">
+        <p className="font-medium mb-1 text-brown-primary text-[20px] leading-[24.38px]">
           Total Services Time:
         </p>
         <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
@@ -98,7 +102,7 @@ function OrderSummery({
       </div>
       {reservationsData?.date && (
         <div className="mb-2">
-          <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
+          <p className="font-medium mb-1 text-brown-primary text-[20px] leading-[24.38px]">
             Date:
           </p>
           <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
@@ -108,7 +112,7 @@ function OrderSummery({
       )}
       {reservationsData?.time && (
         <div className="mb-2">
-          <p className="font-medium text-brown-primary text-[20px] leading-[24.38px]">
+          <p className="font-medium mb-1 text-brown-primary text-[20px] leading-[24.38px]">
             Time:
           </p>
           <p className="font-medium text-[16px]  flex justify-between leading-[19.5px]">
@@ -116,51 +120,59 @@ function OrderSummery({
           </p>
         </div>
       )}
-      {finalTip && (
-        <div className="mb-2">
-          <p className="font-medium text-brown-primary flex justify-between  text-[20px] leading-[24.38px]">
+      {/* {finalTip && (
+        <div className="">
+          <p className="font-medium mb-1 text-brown-primary flex justify-between  text-[20px] leading-[24.38px]">
             <span>Tips</span>{" "}
             <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
               {finalTip}%
             </span>
           </p>
         </div>
-      )}
+      )} */}
       {reservationsData?.time && (
-        <div className="flex mb-2  justify-evenly">
-          {["20", "25", "30", "35", "40"].map((val) => (
-            <>
-              <button
-                onClick={() => tipButtonSubmit(val)}
-                className={` font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex  justify-center items-center rounded-[50%]  sm:text-sm text-[12px]  ${
-                  tipId === val
-                    ? "bg-brown-primary text-white"
-                    : "bg-white text-brown-primary"
-                }`}
-              >
-                {val}%
-              </button>
-            </>
-          ))}
-          <form onSubmit={tipSubmit}>
-            <input
-              type="number"
-              placeholder="_%"
-              className="bg-white font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex   justify-center items-center rounded-[50%] sm:text-sm text-[12px] placeholder:text-brown-primary  
-    [appearance:textfield]
-     [&::-webkit-inner-spin-button]:appearance-none
-    [&::-webkit-outer-spin-button]:appearance-none
-    [-moz-appearance:textfield]"
-              value={tip}
-              onChange={(e) => setTip(e.target.value)}
-            />
-          </form>
-        </div>
+        <>
+          <p className="font-medium mb-1 text-brown-primary flex justify-between  text-[20px] leading-[24.38px]">
+            <span>Tips</span>{" "}
+            <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
+              {finalTip ? finalTip : "__"}%
+            </span>
+          </p>
+          <div className="flex mb-2  justify-evenly">
+            {["20", "25", "30", "35", "40"].map((val) => (
+              <>
+                <button
+                  onClick={() => tipButtonSubmit(val)}
+                  className={` font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex  justify-center items-center rounded-[50%]  sm:text-sm text-[12px]  ${
+                    tipId === val
+                      ? "bg-brown-primary text-white"
+                      : "bg-white text-brown-primary"
+                  }`}
+                >
+                  {val}%
+                </button>
+              </>
+            ))}
+            <form onSubmit={tipSubmit}>
+              <input
+                type="number"
+                placeholder="__%"
+                className="bg-white font-normal w-9 h-9 sm:w-10 sm:h-10 border-brown-primary border-[0.5px] text-center flex   justify-center items-center rounded-[50%] sm:text-sm text-[12px] placeholder:text-brown-primary  
+              [appearance:textfield]
+              [&::-webkit-inner-spin-button]:appearance-none
+              [&::-webkit-outer-spin-button]:appearance-none
+              [-moz-appearance:textfield]"
+                value={tip}
+                onChange={(e) => setTip(e.target.value)}
+              />
+            </form>
+          </div>
+        </>
       )}
       <div className="flex flex-col  items-center pt-12  text-brown-primary mt-auto ">
         <div className="flex justify-between items-center min-w-full">
           <h2 className="font-bold text-[20px] leading-[24.38px]">Sub TOTAL</h2>
-          <span className="font-bold text-[40px] leading-[48.76px]">
+          <span className="font-bold lg:text-[40px] md:text-[35px] sm:text-[30px] text-[26px] leading-[48.76px]">
             ${tipDollar ? totalPrice + tipDollar : totalPrice}
           </span>
         </div>

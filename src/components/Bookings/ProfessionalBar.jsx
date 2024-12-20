@@ -5,27 +5,31 @@ import { useNavigate } from "react-router-dom";
 function ProfessionalBar({ data }) {
   // Manage active state
   const [isActive, setIsActive] = useState(false);
-  const { image, availability, name, _id } = data;
-  const { date, day } = availability[0] || {};
-  console.log(formatDate(date), day);
-  const navigate = useNavigate();
-
+  const { image, availability, name, notAvailable, _id } = data;
+  const { to } = notAvailable[0] || [];
   const handleClick = () => {
     setIsActive(!isActive);
     if (!_id) return;
     navigate(`services/${_id}`);
   };
-  function formatDate(isoString) {
-    const date = new Date(isoString);
+  const navigate = useNavigate();
+  console.log(formatDate(to));
 
-    const options = { day: "numeric", month: "short" };
-    return date.toLocaleDateString("en-US", options);
+  function formatDate(dateString) {
+    const inputDate = new Date(dateString); // Parse the input date
+    inputDate.setDate(inputDate.getDate() + 1); // Add 1 day
+
+    // Format the result to show only the day and month
+    const options = { month: "short", day: "numeric" }; // Example: "Dec 30"
+    return inputDate.toLocaleDateString("en-US", options);
   }
-
   return (
     <div
       onClick={handleClick}
-      className={`relative uppercase flex items-center sm:gap-6 gap-2 hover:text-white  shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] transition-shadow cursor-pointer border-[#4F4F4F] border-[0.5px] rounded-[100px] px-2 py-2 overflow-hidden 
+      // ${
+      //   !availability ? "pointer-events-none cursor-not-allowed opacity-50" : ""
+      // }
+      className={`relative uppercase flex items-center sm:gap-6 gap-2 hover:text-white    shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] transition-shadow cursor-pointer border-[#4F4F4F] border-[0.5px] rounded-[100px] px-2 py-2 overflow-hidden 
       ${isActive ? "bg-[#523939] text-white" : "text-[#523939]"}
       group`}
     >
@@ -45,7 +49,7 @@ function ProfessionalBar({ data }) {
         <p className="font-semibold text-[14px] sm:text-[18px] leading-[24.38px] text-left">
           Availability:
           <span className="italic font-medium text-left">
-            {date && day ? `${day}, ${formatDate(date)}` : ""}
+            {availability && !to ? "today" : formatDate(to)}
           </span>{" "}
         </p>
       </div>
