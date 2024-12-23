@@ -13,7 +13,6 @@ function ProfessionalBar({ data }) {
     navigate(`services/${_id}`);
   };
   const navigate = useNavigate();
-  console.log(formatDate(to));
 
   function formatDate(dateString) {
     const inputDate = new Date(dateString); // Parse the input date
@@ -49,7 +48,11 @@ function ProfessionalBar({ data }) {
         <p className="font-semibold text-[14px] sm:text-[18px] leading-[24.38px] text-left">
           Availability:
           <span className="italic font-medium text-left">
-            {availability && !to ? "today" : formatDate(to)}
+            {availability && !to
+              ? "today"
+              : formatDate(to) === "Invalid Date"
+              ? "not available"
+              : formatDate(to)}
           </span>{" "}
         </p>
       </div>

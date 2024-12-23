@@ -5,7 +5,6 @@ import Spinner from "../UI/Spinner";
 
 function Professional() {
   const { professionData, isPending } = useProfessionals();
-  console.log(professionData);
   if (professionData)
     sessionStorage.setItem("professionaldata", JSON.stringify(professionData));
   if (isPending) return <Spinner />;

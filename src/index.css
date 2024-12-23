@@ -43,3 +43,38 @@ body {
 .hover-white {
   @apply hover:text-brown-primary hover:border-0 hover:border-none hover:bg-white hover:font-semibold hover:!shadow-brown-primary;
 }
+/* src/styles/custom-scrollbar.css */
+
+/* Webkit Browsers (Chrome, Safari, Edge) */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px; /* Decreased height for thinner scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track to hide it by default */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #523939; /* Scrollbar thumb color */
+  border-radius: 9999px; /* Fully rounded */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease, background 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Inner shadow for depth */
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  opacity: 1; /* Show thumb on hover */
+  background: #6b4a4a; /* Slightly lighter color on hover for effect */
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+}
+
+/* Firefox */
+.custom-scrollbar {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #523939 transparent; /* Thumb and track colors */
+  transition: scrollbar-color 0.3s ease;
+}
+
+.custom-scrollbar:hover {
+  scrollbar-color: #6b4a4a transparent; /* Change thumb color on hover */
+}

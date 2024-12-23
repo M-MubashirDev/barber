@@ -1,5 +1,7 @@
 // import React from "react";
 
+import { NavLink } from "react-router-dom";
+
 // Compound Component for Footer Section
 function FooterText({ children }) {
   return (
@@ -20,11 +22,14 @@ function FooterTextHeading({ children }) {
 // text-[24px]  leading-[29.26px] tracking-[0.2em] text-left decoration-solid underline-offset-2
 
 // ListItem Component
-function FooterTextListItem({ children }) {
+function FooterTextListItem({ children, link }) {
   return (
-    <li className="sm:font-normal md:font-[500px] lg:font-semibold font-normal sm:text-[17px] text-[12px] leading-[24.38px]">
+    <NavLink
+      to={link}
+      className="sm:font-normal md:font-[500px] lg:font-semibold font-normal sm:text-[17px] text-[12px] leading-[24.38px]"
+    >
       {children}
-    </li>
+    </NavLink>
   );
 }
 function Logotext({ src }) {

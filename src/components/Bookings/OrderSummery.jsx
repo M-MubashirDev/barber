@@ -26,7 +26,7 @@ function OrderSummery({
   // console.log(totalPrice, totalTime, oderSummery, currentProfessionals);
   function TipInMoney(tip) {
     const calc = (totalPrice / 100) * tip;
-    setTipDollar(calc.toFixed(1));
+    setTipDollar(calc);
   }
   function tipSubmit(e) {
     e.preventDefault();
@@ -42,7 +42,7 @@ function OrderSummery({
       TipInMoney(0);
       return;
     }
-    console.log(val === tipId, val, tipId);
+    // console.log(val === tipId, val, tipId);
     setFinalTip(val);
     setTipId(val);
     TipInMoney(val);
@@ -51,13 +51,13 @@ function OrderSummery({
     onOpen(true);
     setReservationData({
       ...reservationsData,
-      subTotal: totalPrice,
-      grandTotal: totalPrice + tipDollar,
+      subTotal: Number(totalPrice),
+      grandTotal: (Number(totalPrice) + Number(tipDollar)).toFixed(1),
       tip: tipDollar,
     });
   }
   useEffect(() => {
-    console.log(finalTip, tipDollar, reservationsData, tipId);
+    // console.log(reservationsData);
   }, [finalTip, tipId, tipDollar, reservationsData]);
   return (
     <div className="min-h-[80vh] flex flex-col gap-2   my-14 pl-4 pr-6 shadow-lg  md:pl-6 md:pr-8 py-6 bg-[#ECECEC] min-w-fit  rounded-[20px]">

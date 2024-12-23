@@ -1,14 +1,30 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
-const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
+const CalendarComp = ({
+  timeSlots,
+  select,
+  available,
+  totalTime,
+  shopTime,
+}) => {
   const [currentDate] = useState(new Date());
   const [selectedMonth, setSelectedMonth] = useState("current");
   const [workingDay, setWorkingDay] = useState([]);
   const [blockedTimeSlots, setBlockedTimeSlots] = useState({});
+  const [daysArray] = useState([
+    "Sun",
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+  ]);
 
   const { availableTimeSlots, setAvailableTimeSlots } = available;
   const { selectedDay, setSelectedDay } = select;
+  const { shopStart, shopEnd, shopday } = shopTime;
 
   const getMonthName = (monthIndex, year) => {
     const date = new Date(year, monthIndex, 1);
@@ -32,8 +48,24 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
   const onClickDay = (dayAbbreviation, dayNumber, dateObject) => {
     const selectedDate = dateObject.toDateString();
     setSelectedDay(selectedDate);
-
-    const allSlots = generateTimeSlots("09:00", totalTime, "16:00");
+    //open time calc
+    const starting =
+      daysArray[currentDate.getDay()].toLowerCase() ===
+      dayAbbreviation.toLowerCase()
+        ? currentDate.getHours() > shopStart.slice(0, 2)
+          ? `${currentDate.getHours() + 1}:00`
+          : shopStart
+        : shopStart;
+    console.log(
+      currentDate.getHours(),
+      starting,
+      shopStart,
+      daysArray[currentDate.getDay()].toLowerCase() ===
+        dayAbbreviation.toLowerCase(),
+      currentDate.getHours() > shopStart,
+      Number(shopStart.slice(0, 2))
+    );
+    const allSlots = generateTimeSlots(starting, totalTime, shopEnd);
     const blockedSlots = blockedTimeSlots[dayAbbreviation] || [];
     const availableSlots = getAvailableTimeSlots(allSlots, blockedSlots);
 
@@ -46,13 +78,33 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
   };
 
   const parseDays = (daysString) => {
-    const daysOrder = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const daysOrder = daysArray;
     let result = [];
+
+    if (!daysString || typeof daysString !== "string") {
+      console.warn(`Invalid input for parseDays:`, daysString);
+      return result;
+    }
+
+    // Normalize the input to match the casing in daysOrder
+    daysString = daysString
+      .split(/[-,]/)
+      .map((day) => day.trim())
+      .map((day) => {
+        const lower = day.toLowerCase();
+        return daysOrder.find((d) => d.toLowerCase() === lower) || day; // Return the original if not found
+      })
+      .join(daysString.includes("-") ? "-" : ",");
 
     if (daysString.includes("-")) {
       const [start, end] = daysString.split("-");
       const startIndex = daysOrder.indexOf(start.trim());
       const endIndex = daysOrder.indexOf(end.trim());
+
+      if (startIndex === -1 || endIndex === -1) {
+        console.warn(`Invalid day range: ${daysString}`);
+        return result;
+      }
 
       if (startIndex <= endIndex) {
         for (let i = startIndex; i <= endIndex; i++) {
@@ -69,10 +121,21 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
       }
     } else if (daysString.includes(",")) {
       const days = daysString.split(",").map((day) => day.trim());
-      result = days;
+      days.forEach((day) => {
+        if (daysOrder.includes(day)) {
+          result.push(day);
+        } else {
+          console.warn(`Invalid day in list: ${day}`);
+        }
+      });
     } else {
       // Single day
-      result = [daysString.trim()];
+      const day = daysString.trim();
+      if (daysOrder.includes(day)) {
+        result = [day];
+      } else {
+        console.warn(`Invalid day: ${day}`);
+      }
     }
 
     return result;
@@ -237,11 +300,11 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
       </div>
 
       {/* Wrap days and dates in the same scroll container */}
-      <div className="!overflow-x-auto">
+      <div className="!overflow-x-auto custom-scrollbar">
         <div className="min-w-[500px]">
           {/* Days of the Week */}
           <div className="grid grid-cols-7 gap-2 mb-4">
-            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+            {daysArray.map((day) => (
               <div
                 key={day}
                 className="font-medium text-sm sm:text-base leading-[19.5px] text-gray-700 text-center whitespace-nowrap"
@@ -316,3 +379,4 @@ const CalendarComp = ({ timeSlots, select, available, totalTime }) => {
 };
 
 export default CalendarComp;
+// ///////////////////////////////////////

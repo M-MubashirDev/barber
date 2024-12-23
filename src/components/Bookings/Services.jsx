@@ -20,7 +20,6 @@ function Services() {
       (professional) => professional._id === id
     )
   );
-  console.log(professionalServices, serviceData, "asd");
   //calc total time in mins
   function SumNum(number) {
     if (!Number.isNaN(Number(number))) return Number(number);
@@ -81,12 +80,22 @@ function Services() {
   // );
   if (!id) navigate("/");
   if (isPending) return <Spinner />;
-  if (!professionalServices)
+  if (!professionalServices.length)
     return (
       <div className="flex items-center justify-center min-h-screen bg-white">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#523939] text-center px-4">
-          There are no services for this professional.
-        </h2>
+        <div className="text-center shadow-lg p-6 rounded-lg bg-gray-50">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#523939] mb-4">
+            There are no services for this professional.
+          </h2>
+          <button
+            onClick={() => navigate(-1)}
+            className="relative font-montserrat  inline-flex items-center justify-center rounded-[10px]  overflow-hidden  tracking-tighter  group border sm:place-self-center lg:place-self-start   border-brown-primary text-[14px] sm:text-[16px] px-2 sm:w-60 md:w-72 h-11 bg-white text-brown-primary hover:bg-[#4b2e2e] hover:shadow-lg !shadow-brown-primary hover:text-white hover-styling"
+          >
+            <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-[#4b2e2e]  rounded-full group-hover:w-72 group-hover:h-56"></span>
+            <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent "></span>
+            <span className="relative">Other Professionals</span>
+          </button>
+        </div>
       </div>
     );
   return (

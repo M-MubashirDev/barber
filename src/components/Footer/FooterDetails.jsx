@@ -26,10 +26,12 @@ function FooterDetails() {
         </FooterText>
         <FooterText>
           <FooterText.Heading>QUICK LINKS</FooterText.Heading>
-          <FooterText.ListItem>Home</FooterText.ListItem>
-          <FooterText.ListItem>About Us</FooterText.ListItem>
-          <FooterText.ListItem>Contact Us</FooterText.ListItem>
-          <FooterText.ListItem>Book Appointment</FooterText.ListItem>
+          <FooterText.ListItem link="/">Home</FooterText.ListItem>
+          <FooterText.ListItem link="/about">About Us</FooterText.ListItem>
+          <FooterText.ListItem link="/contact">Contact Us</FooterText.ListItem>
+          <FooterText.ListItem link="bookings">
+            Book Appointment
+          </FooterText.ListItem>
         </FooterText>
         <FooterText>
           <FooterText.Heading>CONTACT</FooterText.Heading>

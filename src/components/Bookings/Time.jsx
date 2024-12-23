@@ -8,6 +8,24 @@ import { useTime } from "./Hooks/useTime";
 import PaymentModal from "./PaymentModal";
 
 function Time() {
+  // const timeSlots = [
+  //   {
+  //     manualBookingDetails: {
+  //       date: "2024-12-20",
+  //       startTime: "10:00",
+  //       endTime: "12:00",
+  //       _id: "booking1",
+  //     },
+  //   },
+  //   {
+  //     notAvailable: {
+  //       from: "2024-12-25T00:00:00.000Z",
+  //       to: "2024-12-26T00:00:00.000Z",
+  //       _id: "holiday1",
+  //     },
+  //   },
+  //   // Add more entries as needed
+  // ];
   const [isPayment, setIsPayment] = useState(false); // for main payment button
   const { timeData, isPending } = useTime(); // get API for the time data
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]); // to get available slots of time from the calendar
@@ -15,9 +33,9 @@ function Time() {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); // the current selected time slot
   const [reservationsData, setReservationData] = useState({}); // the id, time select and end etc
   const inquiries = timeData?.inquiries; //
-  const timeSlots = inquiries?.map((val) => val.timeSlots); // time slots that are not available from backend
+  const timeSlotss = inquiries?.map((val) => val.timeSlots); // time slots that are not available from backend
   const { id } = useParams();
-
+  // console.log(timeData);
   const navigate = useNavigate();
   const currentSelectedServices = JSON.parse(
     // it gives two keys: one selected services and their total
@@ -36,7 +54,6 @@ function Time() {
     }
   }, [navigate, obj]);
   const { image, name, _id } = professionalData;
-  console.log(image, name, _id);
 
   // Helper to convert 24-hour time to 12-hour AM/PM format
   function formatTime12Hour(time) {
@@ -86,10 +103,23 @@ function Time() {
         </h1>
         <div className="max-w-full">
           <CalendarComp
-            timeSlots={timeSlots}
+            timeSlots={[
+              [
+                { day: "Mon", startTime: "09:00", endTime: "10:00" },
+                { day: "Mon", startTime: "14:00", endTime: "15:00" },
+                { day: "sat", startTime: "14:00", endTime: "15:00" },
+              ],
+              [{ day: "sat", startTime: "14:00", endTime: "15:00" }],
+              [{ day: "Tue", startTime: "11:00", endTime: "12:30" }],
+            ]}
             select={{ selectedDay, setSelectedDay }}
             available={{ availableTimeSlots, setAvailableTimeSlots }}
             totalTime={obj.totalTime}
+            shopTime={{
+              shopday: "Mon",
+              shopStart: "09:00",
+              shopEnd: "18:00",
+            }}
           />
         </div>
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-4 mt-6">
@@ -158,7 +188,14 @@ function Time() {
       </div>
 
       {/* Payment Modal */}
-      {<PaymentModal isOpen={isPayment} onClose={setIsPayment} />}
+      {
+        <PaymentModal
+          isOpen={isPayment}
+          onClose={setIsPayment}
+          setReservationData={setReservationData}
+          reservationsData={reservationsData}
+        />
+      }
     </section>
   );
 }
