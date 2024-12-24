@@ -238,7 +238,7 @@ function Time() {
                 ))}
               </ul>
             ) : (
-              <p className="text-center shadow-sm max-w-fit text-brown-primary text-[14px] lg:text-[24px] md:text-[20px] sm:text-[16px] lg:text-left">
+              <p className="text-center justify-self-center xl:justify-self-start shadow-sm max-w-fit text-brown-primary text-[14px] lg:text-[24px] md:text-[20px] sm:text-[16px] xl:text-left">
                 No available time slots for this day.
               </p>
             )}

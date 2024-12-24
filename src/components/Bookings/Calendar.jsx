@@ -112,6 +112,7 @@ const CalendarComp = ({
     return notAvailableDates.some(({ from, to }) => {
       const fromDate = new Date(from);
       const toDate = new Date(to);
+      console.log(date >= fromDate && date <= toDate, "😍😍😍❤");
       return date >= fromDate && date <= toDate;
     });
   }
@@ -269,10 +270,12 @@ const CalendarComp = ({
               let dateStyle =
                 "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
               if (isToday) {
-                dateStyle += " bg-[#eeeded] text-[#523939] font-black";
+                dateStyle +=
+                  " bg-[#dedada] text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
               } else if (isSelectedDay) {
-                dateStyle += " bg-blue-300 text-black";
+                dateStyle += " bg-[#5f0202]  text-white";
               } else if (isOutOfRange || isNotAvailable) {
+                console.log(isNotAvailable);
                 dateStyle +=
                   " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
               } else {

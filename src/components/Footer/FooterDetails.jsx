@@ -40,8 +40,8 @@ function FooterDetails() {
             hotrodbrbr<span className="inline-block">@yahoo.com</span>
           </FooterText.ListItem>
           <div className="flex gap-4 sm:gap-8 my-2 ml:4 sm:ml-6">
-            <FooterText.Logotext src="facebook.png" />
-            <FooterText.Logotext src="instagram.png" />
+            <FooterText.Logotext src="fb.png" />
+            <FooterText.Logotext src="insta.png" />
           </div>
         </FooterText>
       </div>
