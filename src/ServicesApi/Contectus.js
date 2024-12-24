@@ -2,7 +2,10 @@ import axios from "axios";
 
 export async function Contectus({ data }) {
   try {
-    const response = await axios.post(`http://127.0.0.1:5000/contactus`, data);
+    const response = await axios.post(
+      `https://hotrodsbackend.onrender.com/contactus`,
+      data
+    );
     return response;
   } catch (error) {
     console.error("Error fetching professional data:", error.message);

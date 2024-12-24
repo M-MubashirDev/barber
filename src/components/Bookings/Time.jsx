@@ -209,7 +209,7 @@ function Time() {
         {/* TIME SLOTS FOR THE SELECTED DAY */}
         {selectedDay && (
           <div className="mt-6 w-full">
-            <h3 className="text-2xl font-bold mb-4 text-center text-brown-primary sm:text-left">
+            <h3 className="text-2xl font-bold mb-4  text-center text-brown-primary lg:text-left ">
               Available Times:
             </h3>
 
@@ -238,7 +238,7 @@ function Time() {
                 ))}
               </ul>
             ) : (
-              <p className="text-center text-brown-primary sm:text-left">
+              <p className="text-center shadow-sm max-w-fit text-brown-primary text-[14px] lg:text-[24px] md:text-[20px] sm:text-[16px] lg:text-left">
                 No available time slots for this day.
               </p>
             )}

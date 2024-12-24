@@ -269,7 +269,7 @@ const CalendarComp = ({
               let dateStyle =
                 "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
               if (isToday) {
-                dateStyle += " bg-[#523939] font-bold text-white";
+                dateStyle += " bg-[#eeeded] text-[#523939] font-black";
               } else if (isSelectedDay) {
                 dateStyle += " bg-blue-300 text-black";
               } else if (isOutOfRange || isNotAvailable) {
@@ -277,7 +277,7 @@ const CalendarComp = ({
                   " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
               } else {
                 dateStyle +=
-                  " bg-white border-[0.5px] border-[#523939] text-black cursor-pointer hover:bg-blue-200";
+                  " bg-white border-[0.5px] border-[#523939] text-black hover:text-white cursor-pointer hover:bg-[#523939]";
               }
 
               return (

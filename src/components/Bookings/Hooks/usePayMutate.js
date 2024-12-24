@@ -18,7 +18,7 @@ export function usePayMutate() {
 // TODO: Send combinedData to the backend via API call
 // Example using fetch:
 // try {
-//   const response = await fetch("http://127.0.0.1:5000/pay", {
+//   const response = await fetch("https://hotrodsbackend.onrender.com/pay", {
 //     method: "POST",
 //     headers: {
 //       "Content-Type": "application/json",
