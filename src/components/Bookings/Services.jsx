@@ -102,11 +102,11 @@ function Services() {
     <section className="font-extrabold px-4 py-10  max-w-[1440px] mx-auto w-[90%] leading-[58.51px]">
       {/* <div className="justify-center place-content-center gap-3  grid lg:grid-cols-[80%_18rem] md:grid ">
        */}
-      <div className="flex flex-col items-center  lg:gap-8 justify-between lg:items-start lg:flex-row ">
+      <div className="flex flex-col items-center  lg:gap-8 justify-between  lg:items-start lg:flex-row ">
         <div className="max-w-fit flex flex-col lg:items-start items-center">
           <LinksBar />
           <h1 className="booking-h1">Choose Services</h1>
-          <div className="flex md:flex-row flex-col gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
+          <div className="grid md:grid-cols-2 gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
             {professionalServices?.map((val) => (
               <Duration
                 key={val._id}

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 
 const CalendarComp = ({
@@ -10,243 +9,189 @@ const CalendarComp = ({
 }) => {
   const [currentDate] = useState(new Date());
   const [selectedMonth, setSelectedMonth] = useState("current");
-  const [workingDay, setWorkingDay] = useState([]);
   const [blockedTimeSlots, setBlockedTimeSlots] = useState({});
-  const [daysArray] = useState([
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-  ]);
+  const [notAvailableDates, setNotAvailableDates] = useState([]);
 
   const { availableTimeSlots, setAvailableTimeSlots } = available;
   const { selectedDay, setSelectedDay } = select;
-  const { shopStart, shopEnd, shopday } = shopTime;
 
-  const getMonthName = (monthIndex, year) => {
+  // Only allow clicks within [today, oneMonthFromNow]
+  const oneMonthFromNow = new Date(currentDate);
+  oneMonthFromNow.setMonth(oneMonthFromNow.getMonth() + 1);
+
+  // Utility: month name
+  function getMonthName(monthIndex, year) {
     const date = new Date(year, monthIndex, 1);
     return date.toLocaleString("default", { month: "long" });
-  };
+  }
 
-  const getDaysInMonth = (year, month) => {
+  // Utility: how many days in this month
+  function getDaysInMonth(year, month) {
     return new Date(year, month + 1, 0).getDate();
-  };
+  }
 
-  const getStartDay = (year, month) => {
+  // Utility: which weekday does the month start on? (0=Sun,1=Mon,...)
+  function getStartDay(year, month) {
     return new Date(year, month, 1).getDay();
-  };
+  }
 
-  const handleMonthSelection = (month) => {
+  function handleMonthSelection(month) {
     setSelectedMonth(month);
     setSelectedDay(null);
     setAvailableTimeSlots([]);
-  };
+  }
 
-  const onClickDay = (dayAbbreviation, dayNumber, dateObject) => {
-    const selectedDate = dateObject.toDateString();
-    setSelectedDay(selectedDate);
-    //open time calc
-    const starting =
-      daysArray[currentDate.getDay()].toLowerCase() ===
-      dayAbbreviation.toLowerCase()
-        ? currentDate.getHours() > shopStart.slice(0, 2)
-          ? `${currentDate.getHours() + 1}:00`
-          : shopStart
-        : shopStart;
-    console.log(
-      currentDate.getHours(),
-      starting,
-      shopStart,
-      daysArray[currentDate.getDay()].toLowerCase() ===
-        dayAbbreviation.toLowerCase(),
-      currentDate.getHours() > shopStart,
-      Number(shopStart.slice(0, 2))
-    );
-    const allSlots = generateTimeSlots(starting, totalTime, shopEnd);
-    const blockedSlots = blockedTimeSlots[dayAbbreviation] || [];
-    const availableSlots = getAvailableTimeSlots(allSlots, blockedSlots);
+  // Convert "HH:MM" => minutes
+  function convertToMinutes(time) {
+    if (!time || typeof time !== "string") return null;
+    const [hrStr, minStr] = time.split(":");
+    const hour = parseInt(hrStr, 10);
+    const minute = parseInt(minStr, 10);
+    if (isNaN(hour) || isNaN(minute)) return null;
+    return hour * 60 + minute;
+  }
 
-    setAvailableTimeSlots(availableSlots);
-  };
+  // Overlap check
+  function isOverlap(slot1, slot2) {
+    const s1Start = convertToMinutes(slot1.start);
+    const s1End = convertToMinutes(slot1.end);
+    const s2Start = convertToMinutes(slot2.startTime);
+    const s2End = convertToMinutes(slot2.endTime);
 
-  const getDayAbbreviation = (year, month, day) => {
-    const date = new Date(year, month, day);
-    return date.toLocaleString("default", { weekday: "short" });
-  };
-
-  const parseDays = (daysString) => {
-    const daysOrder = daysArray;
-    let result = [];
-
-    if (!daysString || typeof daysString !== "string") {
-      console.warn(`Invalid input for parseDays:`, daysString);
-      return result;
+    if ([s1Start, s1End, s2Start, s2End].includes(null)) {
+      return false;
     }
+    return s1Start < s2End && s1End > s2Start;
+  }
 
-    // Normalize the input to match the casing in daysOrder
-    daysString = daysString
-      .split(/[-,]/)
-      .map((day) => day.trim())
-      .map((day) => {
-        const lower = day.toLowerCase();
-        return daysOrder.find((d) => d.toLowerCase() === lower) || day; // Return the original if not found
-      })
-      .join(daysString.includes("-") ? "-" : ",");
-
-    if (daysString.includes("-")) {
-      const [start, end] = daysString.split("-");
-      const startIndex = daysOrder.indexOf(start.trim());
-      const endIndex = daysOrder.indexOf(end.trim());
-
-      if (startIndex === -1 || endIndex === -1) {
-        console.warn(`Invalid day range: ${daysString}`);
-        return result;
-      }
-
-      if (startIndex <= endIndex) {
-        for (let i = startIndex; i <= endIndex; i++) {
-          result.push(daysOrder[i]);
-        }
-      } else {
-        // Handle wrap-around
-        for (let i = startIndex; i < daysOrder.length; i++) {
-          result.push(daysOrder[i]);
-        }
-        for (let i = 0; i <= endIndex; i++) {
-          result.push(daysOrder[i]);
-        }
-      }
-    } else if (daysString.includes(",")) {
-      const days = daysString.split(",").map((day) => day.trim());
-      days.forEach((day) => {
-        if (daysOrder.includes(day)) {
-          result.push(day);
-        } else {
-          console.warn(`Invalid day in list: ${day}`);
-        }
-      });
-    } else {
-      // Single day
-      const day = daysString.trim();
-      if (daysOrder.includes(day)) {
-        result = [day];
-      } else {
-        console.warn(`Invalid day: ${day}`);
-      }
-    }
-
-    return result;
-  };
-
-  const generateTimeSlots = (
-    start = "09:00",
-    slotDuration = 60,
-    end = "16:00"
-  ) => {
+  // Generate slots from shopStart -> shopEnd in `totalTime` increments
+  function generateTimeSlots(start, slotDuration, end) {
     const slots = [];
-    const [startHour, startMinute] = start.split(":").map(Number);
-    const [endHour, endMinute] = end.split(":").map(Number);
+    const [startH, startM] = start.split(":").map(Number);
+    const [endH, endM] = end.split(":").map(Number);
 
-    let current = new Date(0, 0, 0, startHour, startMinute);
-    const endTime = new Date(0, 0, 0, endHour, endMinute);
+    let current = new Date(0, 0, 0, startH, startM);
+    const endTime = new Date(0, 0, 0, endH, endM);
 
     while (current < endTime) {
       const slotStart = current.toTimeString().slice(0, 5);
       current.setMinutes(current.getMinutes() + slotDuration);
-      let slotEnd = current.toTimeString().slice(0, 5);
-
-      if (current > endTime) {
-        slotEnd = end;
-      }
+      const slotEnd =
+        current > endTime ? end : current.toTimeString().slice(0, 5);
 
       if (slotStart && slotEnd && slotStart !== slotEnd) {
         slots.push({ start: slotStart, end: slotEnd });
       }
     }
-
     return slots;
-  };
+  }
 
-  const getAvailableTimeSlots = (allSlots, blockedSlots) => {
-    return allSlots.filter((slot) => {
-      return !blockedSlots.some((blocked) => isOverlap(slot, blocked));
+  // Filter out blocked times
+  function getAvailableTimeSlots(allSlots, blockedSlots) {
+    return allSlots.filter(
+      (slot) => !blockedSlots.some((blocked) => isOverlap(slot, blocked))
+    );
+  }
+
+  // Get opening and closing times for the selected day
+  function getShopTimesForDay(day) {
+    if (Array.isArray(shopTime)) {
+      const dayData = shopTime.find((item) => item.day === day);
+      if (dayData && dayData.time) {
+        const [start, end] = dayData.time.split("-");
+        return { shopStart: start, shopEnd: end };
+      }
+    } else if (typeof shopTime === "object" && shopTime !== null) {
+      return { shopStart: shopTime.shopStart, shopEnd: shopTime.shopEnd };
+    }
+    return { shopStart: "09:00", shopEnd: "18:00" }; // Default times if not found
+  }
+
+  // Check if a date is within the not available dates range
+  function isDateNotAvailable(date) {
+    return notAvailableDates.some(({ from, to }) => {
+      const fromDate = new Date(from);
+      const toDate = new Date(to);
+      return date >= fromDate && date <= toDate;
     });
-  };
+  }
 
-  const isOverlap = (slot1, slot2) => {
-    const slot1Start = convertToMinutes(slot1.start);
-    const slot1End = convertToMinutes(slot1.end);
-    const slot2Start = convertToMinutes(slot2.startTime);
-    const slot2End = convertToMinutes(slot2.endTime);
+  // When user clicks a day in the calendar
+  function onClickDay(dayNumber, dateObject) {
+    const localDateString = dateObject.toLocaleDateString("en-CA");
 
-    if (
-      slot1Start === null ||
-      slot1End === null ||
-      slot2Start === null ||
-      slot2End === null
-    ) {
-      return false;
+    if (isDateNotAvailable(dateObject)) {
+      return; // Do nothing if the date is not available
     }
 
-    return slot1Start < slot2End && slot1End > slot2Start;
-  };
+    setSelectedDay(dateObject.toDateString());
 
-  const convertToMinutes = (time) => {
-    if (!time || typeof time !== "string") {
-      console.warn(`Invalid time value: ${time}`);
-      return null;
+    const isToday = dateObject.toDateString() === currentDate.toDateString();
+    const currentHour = currentDate.getHours();
+    const shopDay = dateObject.toLocaleString("default", { weekday: "long" });
+    const { shopStart, shopEnd } = getShopTimesForDay(shopDay);
+    const shopStartHour = parseInt(shopStart.split(":")[0], 10);
+
+    let startingTime;
+    if (isToday && currentHour >= shopStartHour) {
+      startingTime = `${currentHour + 1}:00`;
+    } else {
+      startingTime = shopStart;
     }
-    const [hour, minute] = time.split(":").map(Number);
-    if (isNaN(hour) || isNaN(minute)) {
-      console.warn(`Invalid time format: ${time}`);
-      return null;
-    }
-    return hour * 60 + minute;
-  };
+
+    const allSlots = generateTimeSlots(startingTime, totalTime, shopEnd);
+    const blockedSlots = blockedTimeSlots[localDateString] || [];
+    const availableSlots = getAvailableTimeSlots(allSlots, blockedSlots);
+    setAvailableTimeSlots(availableSlots);
+
+    console.log("Clicked dateObj =>", dateObject);
+    console.log("Local date =>", localDateString);
+    console.log("Blocked =>", blockedSlots);
+    console.log("Available =>", availableSlots);
+  }
 
   useEffect(() => {
-    if (timeSlots && timeSlots.length > 0) {
-      const daysSet = new Set();
-      const flattenedTimeSlots = timeSlots.flat();
-      const blockedSlotsMap = {};
+    if (Array.isArray(timeSlots) && timeSlots.length > 0) {
+      const flattened = timeSlots.flat();
+      const map = {};
 
-      flattenedTimeSlots.forEach((slot) => {
-        if (!slot || !slot.day || !slot.startTime || !slot.endTime) {
-          console.warn(`Malformed slot detected and skipped:`, slot);
+      flattened.forEach((slot) => {
+        if (!slot.date || !slot.startTime || !slot.endTime) {
+          console.warn("Malformed slot:", slot);
           return;
         }
-
-        const parsedDays = parseDays(slot.day);
-        parsedDays.forEach((day) => {
-          daysSet.add(day);
-          if (!blockedSlotsMap[day]) {
-            blockedSlotsMap[day] = [];
-          }
-          blockedSlotsMap[day].push({
-            startTime: slot.startTime,
-            endTime: slot.endTime,
-          });
+        if (!map[slot.date]) {
+          map[slot.date] = [];
+        }
+        map[slot.date].push({
+          startTime: slot.startTime,
+          endTime: slot.endTime,
         });
       });
 
-      setWorkingDay(Array.from(daysSet));
-      setBlockedTimeSlots(blockedSlotsMap);
+      setBlockedTimeSlots(map);
     } else {
-      setWorkingDay([]);
       setBlockedTimeSlots({});
+    }
+  }, [timeSlots]);
+
+  useEffect(() => {
+    if (Array.isArray(timeSlots) && timeSlots.length > 0) {
+      const notAvailable = timeSlots.reduce((acc, inquiry) => {
+        if (inquiry?.professional?.notAvailable) {
+          acc.push(...inquiry.professional.notAvailable);
+        }
+        return acc;
+      }, []);
+      setNotAvailableDates(notAvailable);
     }
   }, [timeSlots]);
 
   const currentMonthIndex = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
-
   const nextMonthIndex = (currentMonthIndex + 1) % 12;
   const nextMonthYear =
     currentMonthIndex === 11 ? currentYear + 1 : currentYear;
-
   const monthIndex =
     selectedMonth === "current" ? currentMonthIndex : nextMonthIndex;
   const year = selectedMonth === "current" ? currentYear : nextMonthYear;
@@ -258,8 +203,8 @@ const CalendarComp = ({
   for (let i = 0; i < startDay; i++) {
     calendarDays.push(null);
   }
-  for (let day = 1; day <= daysInMonth; day++) {
-    calendarDays.push(day);
+  for (let d = 1; d <= daysInMonth; d++) {
+    calendarDays.push(d);
   }
 
   const today = new Date();
@@ -272,7 +217,6 @@ const CalendarComp = ({
 
   return (
     <div className="min-w-full mx-auto bg-white rounded-lg p-6">
-      {/* Header */}
       <div className="flex flex-wrap justify-center gap-4 items-center mb-6 overflow-x-auto ">
         <button
           onClick={() => handleMonthSelection("current")}
@@ -285,7 +229,6 @@ const CalendarComp = ({
         >
           {currentMonthName}
         </button>
-
         <button
           onClick={() => handleMonthSelection("next")}
           className={`p-2 sm:p-3 border-[0.5px] border-[#523939] min-w-32 sm:min-w-64 rounded-[20px] transition duration-200 font-medium text-base sm:text-xl leading-normal ${
@@ -298,13 +241,10 @@ const CalendarComp = ({
           {nextMonthName}
         </button>
       </div>
-
-      {/* Wrap days and dates in the same scroll container */}
       <div className="!overflow-x-auto custom-scrollbar">
         <div className="min-w-[500px]">
-          {/* Days of the Week */}
           <div className="grid grid-cols-7 gap-2 mb-4">
-            {daysArray.map((day) => (
+            {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div
                 key={day}
                 className="font-medium text-sm sm:text-base leading-[19.5px] text-gray-700 text-center whitespace-nowrap"
@@ -313,45 +253,31 @@ const CalendarComp = ({
               </div>
             ))}
           </div>
-
-          {/* Dates */}
           <div className="grid grid-cols-7 gap-4">
             {calendarDays.map((day, index) => {
               if (day === null) {
-                return <div key={index}></div>;
+                return <div key={index} />;
               }
-
               const dateObj = new Date(year, monthIndex, day);
-              const dayAbbreviation = getDayAbbreviation(year, monthIndex, day);
               const isToday = day === todayDate;
-              const isBeforeToday = isCurrentMonth && day < todayDate;
-              const isAfterToday = isCurrentMonth && day > todayDate;
-              const isNextMonth = selectedMonth === "next";
-              const isWorkingDay = workingDay.includes(dayAbbreviation);
-
-              // Check if selectedDay matches this date
+              const isOutOfRange =
+                dateObj < today.setHours(0, 0, 0, 0) ||
+                dateObj > oneMonthFromNow;
               const isSelectedDay = selectedDay === dateObj.toDateString();
+              const isNotAvailable = isDateNotAvailable(dateObj);
 
               let dateStyle =
                 "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
-
               if (isToday) {
                 dateStyle += " bg-[#523939] font-bold text-white";
               } else if (isSelectedDay) {
                 dateStyle += " bg-blue-300 text-black";
-              } else if (isBeforeToday) {
-                dateStyle += " bg-[#EAEAEA] text-black";
-              } else if (isAfterToday || isNextMonth) {
+              } else if (isOutOfRange || isNotAvailable) {
                 dateStyle +=
-                  " bg-white border-[0.5px] border-[#523939] text-black";
+                  " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
               } else {
-                dateStyle += " bg-transparent text-black";
-              }
-
-              if (isWorkingDay && (isToday || isAfterToday || isNextMonth)) {
-                dateStyle += " cursor-pointer hover:bg-blue-200";
-              } else {
-                dateStyle += " cursor-not-allowed opacity-50";
+                dateStyle +=
+                  " bg-white border-[0.5px] border-[#523939] text-black cursor-pointer hover:bg-blue-200";
               }
 
               return (
@@ -359,11 +285,8 @@ const CalendarComp = ({
                   key={index}
                   className={dateStyle}
                   onClick={() => {
-                    if (
-                      isWorkingDay &&
-                      (isToday || isAfterToday || isNextMonth)
-                    ) {
-                      onClickDay(dayAbbreviation, day, dateObj);
+                    if (!isOutOfRange && !isNotAvailable) {
+                      onClickDay(day, dateObj);
                     }
                   }}
                 >
@@ -379,4 +302,3 @@ const CalendarComp = ({
 };
 
 export default CalendarComp;
-// ///////////////////////////////////////

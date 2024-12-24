@@ -37,7 +37,8 @@ function ProfessionalBar({ data }) {
 
       {/* Content */}
       <img
-        src={image}
+        src={image || "imgCircle.png"}
+        // src="/imgCircle.png"
         alt="barber"
         className="z-10 max-w-20 max-h-20 w-20 h-20 rounded-full object-cover"
       />

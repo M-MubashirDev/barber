@@ -69,7 +69,7 @@ function OrderSummery({
       </p>
       <div className="flex gap-2 mb-2 items-center">
         <img
-          src={image}
+          src={image || "imgCircle.png"}
           alt="barber"
           className="min-w-12 min-h-12 w-12 h-12   rounded-[50%]"
         />

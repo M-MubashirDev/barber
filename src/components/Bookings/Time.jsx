@@ -1,64 +1,128 @@
 import { useNavigate, useParams } from "react-router-dom";
-import CalendarComp from "./Calendar";
+import { useEffect, useState } from "react";
 import LinksBar from "./LinksBar";
 import OrderSummery from "./OrderSummery";
-import { useEffect, useState } from "react";
 import Spinner from "../UI/Spinner";
-import { useTime } from "./Hooks/useTime";
 import PaymentModal from "./PaymentModal";
+import CalendarComp from "./Calendar"; // <-- We'll create this file below.
+import { useTime } from "./Hooks/useTime"; // <-- your custom hook that fetches `timeData`
+import { useShopTiming } from "./Hooks/useShopTiming";
+
+/**
+ * Given a date range `{ from, to }`, generate an array of "YYYY-MM-DD" strings
+ * for each calendar day from `from` up to and including `to`.
+ */
+function getDateRangeAsArray(from, to) {
+  const result = [];
+  const start = new Date(from);
+  const end = new Date(to);
+  if (start > end) return result;
+
+  let current = new Date(start);
+  while (current <= end) {
+    const y = current.getFullYear();
+    const m = String(current.getMonth() + 1).padStart(2, "0");
+    const d = String(current.getDate()).padStart(2, "0");
+    result.push(`${y}-${m}-${d}`);
+    current.setDate(current.getDate() + 1);
+  }
+  return result;
+}
+
+/**
+ * Transform your `inquiries` array into an array of blocked slots with:
+ *   { date: "YYYY-MM-DD", startTime: "HH:MM", endTime: "HH:MM" }
+ * for each unavailable time or day.
+ */
+function buildBlockedSlots(inquiries) {
+  const blocked = [];
+  console.log("ass");
+  inquiries.forEach((inq) => {
+    // 1) If there's a manualBookingDetails => block that exact date/time
+    if (
+      inq?.manualBookingDetails?.date &&
+      inq?.manualBookingDetails?.startTime &&
+      inq?.manualBookingDetails?.endTime
+    ) {
+      blocked.push({
+        date: inq.manualBookingDetails.date, // e.g. "2024-12-24"
+        startTime: inq.manualBookingDetails.startTime, // e.g. "16:35"
+        endTime: inq.manualBookingDetails.endTime, // e.g. "17:25"
+      });
+    }
+
+    // 2) If there's a notAvailable array => block entire days from `from` to `to`
+    const notAvailArr = inq?.professional?.notAvailable || [];
+    notAvailArr.forEach((range) => {
+      const dayStrings = getDateRangeAsArray(range.from, range.to);
+      // For each day in that range, block the entire day from 00:00 -> 23:59
+      dayStrings.forEach((dayStr) => {
+        blocked.push({
+          date: dayStr,
+          startTime: "00:00",
+          endTime: "23:59",
+        });
+      });
+    });
+  });
+
+  return blocked;
+}
 
 function Time() {
-  // const timeSlots = [
-  //   {
-  //     manualBookingDetails: {
-  //       date: "2024-12-20",
-  //       startTime: "10:00",
-  //       endTime: "12:00",
-  //       _id: "booking1",
-  //     },
-  //   },
-  //   {
-  //     notAvailable: {
-  //       from: "2024-12-25T00:00:00.000Z",
-  //       to: "2024-12-26T00:00:00.000Z",
-  //       _id: "holiday1",
-  //     },
-  //   },
-  //   // Add more entries as needed
-  // ];
-  const [isPayment, setIsPayment] = useState(false); // for main payment button
   const { timeData, isPending } = useTime(); // get API for the time data
-  const [availableTimeSlots, setAvailableTimeSlots] = useState([]); // to get available slots of time from the calendar
-  const [selectedDay, setSelectedDay] = useState(null); // the day user selected
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null); // the current selected time slot
-  const [reservationsData, setReservationData] = useState({}); // the id, time select and end etc
-  const inquiries = timeData?.inquiries; //
-  const timeSlotss = inquiries?.map((val) => val.timeSlots); // time slots that are not available from backend
-  const { id } = useParams();
-  // console.log(timeData);
+  const { shopTime, pendingShopeTiming } = useShopTiming();
+  console.log(shopTime);
+  const inquiries = timeData?.inquiries || [];
+  console.log(inquiries);
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  // For Payment Modal
+  const [isPayment, setIsPayment] = useState(false);
+
+  // For Calendar
+  const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+  const [selectedDay, setSelectedDay] = useState(null);
+
+  // For Reservation
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [reservationsData, setReservationData] = useState({});
+
+  // Example: session data about selected services
   const currentSelectedServices = JSON.parse(
-    // it gives two keys: one selected services and their total
     sessionStorage.getItem("selectedServices")
   );
-  const { obj } = currentSelectedServices || {}; // total of selected services
-  const { currentSelectedId, totalTime } = obj;
+  const { obj } = currentSelectedServices || {}; // e.g. { currentSelectedId, totalTime }
+  const { currentSelectedId, totalTime } = obj || {};
+
+  // Example: professional data from session
   const professionalData = JSON.parse(
-    // data about the current professionals
     sessionStorage.getItem("professionaldata")
-  )?.filter((val) => val._id === id)[0];
-  // console.log(professionalData, obj);
+  )?.find((val) => val._id === id);
+
   useEffect(() => {
+    // If no selected services, redirect
     if (!obj || !Object.keys(obj).length) {
       navigate("*");
     }
   }, [navigate, obj]);
+
+  // if (!professionalData || ) {
+  //   return <Spinner />;
+  // }
+
   const { image, name, _id } = professionalData;
 
-  // Helper to convert 24-hour time to 12-hour AM/PM format
+  // Build the final "timeSlots" array from `inquiries`
+  // each element => { date: "YYYY-MM-DD", startTime: "HH:MM", endTime: "HH:MM" }
+  const blockedSlots = buildBlockedSlots(inquiries);
+  console.log(blockedSlots);
+  /**
+   * Convert "HH:MM" to a 12-hour format with AM/PM
+   */
   function formatTime12Hour(time) {
     if (!time || typeof time !== "string") return time;
-
     const [hourStr, minuteStr] = time.split(":");
     let hour = parseInt(hourStr, 10);
     const minute = minuteStr || "00";
@@ -68,65 +132,68 @@ function Time() {
       hour = 12; // midnight
       suffix = "AM";
     } else if (hour === 12) {
-      suffix = "PM"; // noon
+      suffix = "PM";
     } else if (hour > 12) {
-      hour = hour - 12;
+      hour -= 12;
       suffix = "PM";
     }
 
     return `${hour}:${minute} ${suffix}`;
   }
-  // After the timeSlot is clicked
-  function SelectedTimeSlots({ idx, currentlyReserved }) {
+
+  // After user clicks a time slot
+  function handleSelectTimeSlot({ idx, currentlyReserved }) {
     setSelectedTimeSlot(idx);
 
     const reservationData = {
       services: currentSelectedId,
       totalServiceTime: totalTime,
       professional: _id,
-      date: selectedDay,
+      date: selectedDay, // e.g. "Tue Dec 24 2024" or you can store ISO
       time: currentlyReserved.startTime || currentlyReserved.start,
     };
     setReservationData(reservationData);
-    // console.log("Reservation data:", reservationData);
-    // Here you can handle the reservation logic (e.g., API call)
   }
 
-  if (!obj || !Object.keys(obj).length || isPending) return <Spinner />;
+  // Show spinner if still loading or missing data
+  if (!obj || !Object.keys(obj).length || isPending || pendingShopeTiming) {
+    return <Spinner />;
+  }
+
   return (
-    <section className="font-extrabold text-[32px]  max-w-[1440px] flex flex-col lg:flex-row justify-between py-6 items-center gap-6 mx-auto w-full px-4 sm:px-6 lg:px-8 leading-[38px]">
-      {/* Left Side: Calendar and Professional Info */}
+    <section className="font-extrabold text-[32px] max-w-[1440px] flex flex-col lg:flex-row justify-between py-6 items-center gap-6 mx-auto w-full px-4 sm:px-6 lg:px-8 leading-[38px]">
+      {/* LEFT SIDE */}
       <div className="flex flex-col items-center lg:items-start w-full lg:w-2/3">
         <LinksBar />
-        <h1 className="booking-h1 text-4xl sm:text-5xl lg:text-6xl text-center    lg:text-left mb-6">
+        <h1 className="booking-h1 text-4xl sm:text-5xl lg:text-6xl text-center lg:text-left mb-6">
           Choose Date & Time
         </h1>
+
         <div className="max-w-full">
           <CalendarComp
-            timeSlots={[
-              [
-                { day: "Mon", startTime: "09:00", endTime: "10:00" },
-                { day: "Mon", startTime: "14:00", endTime: "15:00" },
-                { day: "sat", startTime: "14:00", endTime: "15:00" },
-              ],
-              [{ day: "sat", startTime: "14:00", endTime: "15:00" }],
-              [{ day: "Tue", startTime: "11:00", endTime: "12:30" }],
-            ]}
+            timeSlots={blockedSlots} // pass date-based blocked slots
             select={{ selectedDay, setSelectedDay }}
             available={{ availableTimeSlots, setAvailableTimeSlots }}
-            totalTime={obj.totalTime}
-            shopTime={{
-              shopday: "Mon",
-              shopStart: "09:00",
-              shopEnd: "18:00",
-            }}
+            totalTime={totalTime} // used as the slot duration
+            // shopTime={[
+            //   { day: "Monday", time: "09:00-18:00" },
+            //   { day: "Tuesday", time: "09:00-18:00" },
+            //   { day: "Wednesday", time: "09:00-18:00" },
+            //   { day: "Thursday", time: "09:00-22:00" },
+            //   { day: "Friday", time: "09:00-18:00" },
+            //   { day: "Saturday", time: "09:00-20:00" },
+            //   { day: "Sunday", time: "09:00-20:00" },
+            // ]}
+            shopTime={shopTime}
           />
         </div>
+
+        {/* PROFESSIONAL INFO */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start gap-4 mt-6">
           <img
-            src={image}
+            src={image || "imgCircle.png"}
             className="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover"
-            alt="professional image"
+            alt="professional"
           />
           <div className="text-center sm:text-left">
             <h2 className="text-2xl capitalize sm:text-3xl font-semibold leading-tight">
@@ -134,15 +201,18 @@ function Time() {
             </h2>
             <p className="text-lg sm:text-xl font-semibold leading-snug mt-2">
               Total Time Of Your Services:{" "}
-              <span className="italic font-medium">{obj.totalTime} Min</span>
+              <span className="italic font-medium">{totalTime} Min</span>
             </p>
           </div>
         </div>
+
+        {/* TIME SLOTS FOR THE SELECTED DAY */}
         {selectedDay && (
-          <div className="mt-6  w-full">
+          <div className="mt-6 w-full">
             <h3 className="text-2xl font-bold mb-4 text-center text-brown-primary sm:text-left">
               Available Times:
             </h3>
+
             {availableTimeSlots.length > 0 ? (
               <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {availableTimeSlots.map((slot, idx) => (
@@ -154,7 +224,7 @@ function Time() {
                         : "bg-white text-brown-primary hover:bg-brown-primary hover:text-white"
                     }`}
                     onClick={() =>
-                      SelectedTimeSlots({
+                      handleSelectTimeSlot({
                         idx,
                         currentlyReserved: {
                           startTime: slot.start,
@@ -163,13 +233,12 @@ function Time() {
                       })
                     }
                   >
-                    {/* Convert slot.start to 12-hour format */}
                     {formatTime12Hour(slot.start)}
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-center text-brown-primary sm:text-left ">
+              <p className="text-center text-brown-primary sm:text-left">
                 No available time slots for this day.
               </p>
             )}
@@ -177,7 +246,7 @@ function Time() {
         )}
       </div>
 
-      {/* Right Side: Order Summary */}
+      {/* RIGHT SIDE: ORDER SUMMARY */}
       <div className="lg:min-w-[30%] lg:justify-start lg:place-self-start">
         <OrderSummery
           onOpen={setIsPayment}
@@ -187,15 +256,13 @@ function Time() {
         />
       </div>
 
-      {/* Payment Modal */}
-      {
-        <PaymentModal
-          isOpen={isPayment}
-          onClose={setIsPayment}
-          setReservationData={setReservationData}
-          reservationsData={reservationsData}
-        />
-      }
+      {/* PAYMENT MODAL */}
+      <PaymentModal
+        isOpen={isPayment}
+        onClose={setIsPayment}
+        setReservationData={setReservationData}
+        reservationsData={reservationsData}
+      />
     </section>
   );
 }
