@@ -214,11 +214,11 @@ function Time() {
             </h3>
 
             {availableTimeSlots.length > 0 ? (
-              <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              <ul className="grid grid-cols-2  sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {availableTimeSlots.map((slot, idx) => (
                   <li
                     key={idx}
-                    className={`border border-brown-primary px-4 py-2 cursor-pointer rounded-[20px] text-center text-lg font-normal transition-colors duration-200 ${
+                    className={`border border-brown-primary hover:shadow-xl px-4 py-2 cursor-pointer rounded-[20px] text-center text-lg font-normal transition-colors duration-200 ${
                       selectedTimeSlot === idx
                         ? "bg-brown-primary text-white"
                         : "bg-white text-brown-primary hover:bg-brown-primary hover:text-white"
