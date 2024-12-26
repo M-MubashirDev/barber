@@ -21,8 +21,8 @@ function About() {
             </h1>
           </div>
         </section>
-        <section className="py-10 ">
-          <div className=" flex flex-col gap-16 max-w-full mx-auto px-4  w-[90%]">
+        {/* <section className="py-10 w-[90%] max-w-full mx-auto">
+          <div className=" flex flex-col gap-16 max-w-fit  px-4  ">
             <div className="flex flex-col-reverse   gap-6 lg:flex-row lg:text-start text-center justify-center items-center lg:gap-12 ">
               <img
                 src="children-hairdresser-cutting.webp"
@@ -47,7 +47,7 @@ function About() {
                 <h1 className="mb-6  text-brown-primary h1-heading ">
                   Great Style is Personal
                 </h1>
-                <p className="place-self-center primary-p">
+                <p className="place-self-center primary-p ">
                   In the heart of our vibrant town, there’s a chair with your
                   name on it—a{" "}
                   <span className="max-w-[30%]">
@@ -75,10 +75,75 @@ function About() {
               <IconComponent src="listen.png" text="We Listen" />
               <IconComponent src="healthcare.png" text="We care" />
               <IconComponent src="ok.png" text="We perfect" />
-              {/* </div> */}
+            
+            </div>
+          </div>
+        </section> */}
+        <section className="py-10 w-[90%] max-w-full mx-auto">
+          <div className="flex flex-col gap-16 max-w-fit px-4">
+            {/* Section 1: Image Left, Text Right */}
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+              <img
+                src="children-hairdresser-cutting.webp"
+                className="lg:max-w-[50%] max-w-full lg:flex-1"
+                alt="cutting hairs"
+              />
+              <div className="lg:flex-1">
+                <h1 className="mb-6 h1-heading text-brown-primary">
+                  Welcome to Bloomington’s Favorite Barbershop
+                </h1>
+                <p className="primary-p">
+                  In the heart of our vibrant town, there’s a chair with your
+                  name on it—a place where every cut is more than just a
+                  service. It’s a connection, a moment to unwind, and a chance
+                  to feel your best.
+                </p>
+              </div>
+            </div>
+
+            {/* Section 2: Text Left, Image Right */}
+            <div className="flex flex-col-reverse gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+              <div className="lg:flex-1">
+                <p className="italic-p text-brown-primary">Our Belief</p>
+                <h1 className="mb-6 text-brown-primary h1-heading">
+                  Great Style is Personal
+                </h1>
+                <p className="primary-p">
+                  In the heart of our vibrant town, there’s a chair with your
+                  name on it—a{" "}
+                  <span className="max-w-[30%]">
+                    place where every cut is more than just a service. It’s a
+                    connection, a moment to unwind, and a chance to feel your
+                    best.
+                  </span>
+                </p>
+              </div>
+              <img
+                src="barber-styling.webp"
+                className="lg:max-w-[50%] max-w-full lg:flex-1"
+                alt="hair styling"
+              />
+            </div>
+
+            {/* Section 3: Centered Text */}
+            <div className="place-self-center text-center">
+              <h1 className="h1-heading text-brown-primary mb-2 md:mb-4">
+                Why We’re Different
+              </h1>
+              <p className="primary-p">
+                Here, it’s not just about hair. It’s about relationships.
+              </p>
+            </div>
+
+            {/* Section 4: Icon Components */}
+            <div className="flex flex-col md:flex-row gap-12 justify-self-center place-self-center">
+              <IconComponent src="listen.png" text="We Listen" />
+              <IconComponent src="healthcare.png" text="We care" />
+              <IconComponent src="ok.png" text="We perfect" />
             </div>
           </div>
         </section>
+
         <section className="bg-brown-primary  py-12 px-4">
           <div className="bg-white max-w-full flex text-center  items-center justify-center gap-4 flex-col p-10  mx-auto w-[90%]">
             <h1 className="h1-heading text-brown-primary ">
@@ -93,12 +158,14 @@ function About() {
             <div className="md:min-w-[35%] min-w-[70%] bg-brown-primary rounded-t-[10px] rounded-b-[10px]  min-h-1 mb-4   mx-auto"></div>
             <div className="flex flex-col text-center lg:text-start xl:flex-row items-center justify-center gap-12">
               <img src="aboutsome.webp" alt="about tools" />
-              <div className="text-center">
-                <h1 className="text-brown-primary mb-4  h1-heading">
+              <div className="text-center  xl:text-start">
+                <h1 className="text-brown-primary mb-4  h1-heading ">
                   Your Experience Matters
                 </h1>
-                <p className="primary-p xl:text-start">We focus on:</p>
-                <ul className="primary-p text-center list-inside xl:text-start">
+                <p className="primary-p text-left  md:text-center xl:text-start">
+                  We focus on:
+                </p>
+                <ul className="primary-p text-left  md:text-center list-inside xl:text-start">
                   <li className="list-disc marker:text-sm">
                     A clean and welcoming environment.
                   </li>

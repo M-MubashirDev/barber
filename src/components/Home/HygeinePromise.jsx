@@ -2,7 +2,7 @@ function HygeinePromise() {
   return (
     <section
       style={{
-        backgroundImage: "url('backgroundbar.webp')",
+        backgroundImage: "url('contect.webp')",
       }}
       className="bg-no-repeat text-white bg-cover px-4  bg-center py-12 "
     >

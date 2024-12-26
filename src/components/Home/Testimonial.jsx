@@ -15,7 +15,7 @@ function Testimonial() {
         </h2>
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Top Row Testimonials */}
-          <div className="bg-white p-6 rounded-lg shadow-md text-left flex flex-col gap-16">
+          <div className="bg-white p-6 rounded-lg shadow-md text-left flex flex-col ">
             <p className="text-[#4F4F4F] primary-p mb-6">
               &quot;The team went above and beyond to ensure my issue was
               resolved quickly and efficiently. Truly outstanding!&quot;

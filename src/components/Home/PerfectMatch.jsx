@@ -77,7 +77,7 @@ function PerfectMatch() {
         </button> */}
         <button
           onClick={() => navigate("/bookings")}
-          className="relative mx-auto flex items-center justify-center overflow-hidden tracking-tighter group sm:place-self-center text-[16px] sm:text-[16px] w-[12rem] h-10 bg-white leading-[19.5px] border border-brown-primary uppercase 
+          className="relative mx-auto flex items-center justify-center overflow-hidden tracking-tighter group sm:place-self-center text-[16px] sm:text-[16px] w-[70%] py-6 px-4 lg:py-2 lg:px-2 h-10 bg-white leading-[19.5px] border border-brown-primary uppercase 
   hover:bg-[#4b2e2e] hover:text-[#f5f5f5] text-brown-primary 
     lg:w-[70%]  text-center font-semibold rounded-[10px] transition-all duration-500 ease-out"
         >

@@ -30,11 +30,11 @@ function Button({ children }) {
   return (
     <button
       onClick={() => navigate("/bookings")}
-      className="relative sm:font-[600] font-[500] px-4 py-2 sm:px-8 sm:py-0 leading-[19.5px] text-white rounded-[8px] hover-white bg-brown-primary text-[12px] sm:text-[14px] md:text-[16px] min-h-12 md:min-w-[70%] overflow-hidden group shadow-md"
+      className="relative inline-flex items-center justify-center  overflow-hidden  font-medium tracking-tighter  group border sm:place-self-center px-4 py-8 sm:px-1 sm:py-2  border-brown-primary rounded-[10px] text-[14px] sm:text-[16px]  w-[80%] h-11 bg-brown-primary text-white hover-white hover-styling"
     >
-      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-72 group-hover:h-56"></span>
+      <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white  rounded-full group-hover:w-72 group-hover:h-56"></span>
       <span className="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-gray-700"></span>
-      <span className="relative z-10">{children} &gt;</span>
+      <span className="relative">{children}</span>
     </button>
   );
 }
