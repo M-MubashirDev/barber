@@ -21,7 +21,7 @@ function StepIntoStule() {
         {/* border-l-8 border-brown-primary */}
         <div className="flex flex-col lg:flex-row lg:mt-[-4rem] items-center justify-center font-montserrat bg-white ">
           <img
-            src="hairstyles.png"
+            src="hairstyles.webp"
             className="lg:max-w-[40%] w-min"
             alt="logo styles"
           />
