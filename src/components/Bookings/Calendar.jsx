@@ -336,7 +336,7 @@ const CalendarComp = ({
               if (isToday) {
                 // style for "today"
                 dateStyle +=
-                  " bg-[#faf4f4] underline text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
+                  " bg-white border-[0.5px] border-[#523939] underline text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
               } else if (isSelectedDay) {
                 // style if selected
                 dateStyle += " bg-[#523939] text-white";

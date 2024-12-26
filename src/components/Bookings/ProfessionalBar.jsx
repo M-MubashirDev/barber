@@ -6,7 +6,11 @@ function ProfessionalBar({ data }) {
   // Manage active state
   const [isActive, setIsActive] = useState(false);
   const { image, availability, name, notAvailable, _id } = data;
-  const { to } = notAvailable[0] || [];
+  const { to, from } = notAvailable[0] || [];
+  const checkFrom = new Date(from);
+  const checktoday = new Date();
+  const check = checkFrom > checktoday;
+  console.log(check, availability);
   const handleClick = () => {
     setIsActive(!isActive);
     if (!_id) return;
@@ -49,7 +53,7 @@ function ProfessionalBar({ data }) {
         <p className="font-semibold text-[14px] sm:text-[18px] leading-[24.38px] text-left">
           Availability:
           <span className="italic font-medium text-left">
-            {availability && !to
+            {availability || check
               ? "today"
               : formatDate(to) === "Invalid Date"
               ? "not available"

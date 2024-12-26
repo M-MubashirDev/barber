@@ -135,7 +135,7 @@ function OrderSummery({
           <p className="font-medium mb-1 text-brown-primary flex justify-between  text-[20px] leading-[24.38px]">
             <span>Tips</span>{" "}
             <span className="font-semibold px-4 text-brown-primary text-[18px] leading-[21.94px]">
-              {finalTip ? finalTip : "__"}%
+              {tipDollar ? tipDollar.toFixed(1) : "__"}$
             </span>
           </p>
           <div className="flex mb-2  justify-evenly">

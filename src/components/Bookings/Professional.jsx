@@ -9,7 +9,7 @@ function Professional() {
     sessionStorage.setItem("professionaldata", JSON.stringify(professionData));
   if (isPending) return <Spinner />;
   return (
-    <section className="max-w-[1440px]    mx-auto w-[90%]">
+    <section className="max-w-[1440px]  pb-8   mx-auto w-[90%]">
       <LinksBar />
       <h1 className="booking-h1">Choose a professional</h1>
       {professionData ? (
