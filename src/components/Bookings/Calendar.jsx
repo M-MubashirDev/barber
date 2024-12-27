@@ -5,7 +5,7 @@ const CalendarComp = ({
   timeSlots, // Array of { date: "YYYY-MM-DD", startTime: "HH:MM", endTime: "HH:MM", possibly with .professional.notAvailable }
   select, // { selectedDay, setSelectedDay }
   available, // { availableTimeSlots, setAvailableTimeSlots }
-  totalTime, // Slot duration in minutes
+  totalTime = 15, // Slot duration in minutes
   shopTime, // Object or array describing shop open times (e.g. { shopStart: "09:00", shopEnd: "18:00" } )
 }) => {
   const [currentDate] = useState(new Date());

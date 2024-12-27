@@ -174,7 +174,7 @@ function Time() {
             timeSlots={blockedSlots} // pass date-based blocked slots
             select={{ selectedDay, setSelectedDay }}
             available={{ availableTimeSlots, setAvailableTimeSlots }}
-            totalTime={totalTime} // used as the slot duration
+            // totalTime={totalTime} // used as the slot duration
             // shopTime={[
             //   { day: "Monday", time: "09:00-18:00" },
             //   { day: "Tuesday", time: "09:00-18:00" },
