@@ -8,7 +8,8 @@ export function useTime() {
     queryKey: ["Time"],
     queryFn: () => Time({ api: `inquire/${id}` }),
     staleTime: 15 * 60 * 1000, // 7 minutes in milliseconds
-    refetchOnWindowFocus: false, // Prevent refetching on tab focus
+    refetchOnWindowFocus: false,
+    // Prevent refetching on tab focus
     refetchOnMount: false, // Prevent refetching on remount
   });
   return { timeData, isPending };

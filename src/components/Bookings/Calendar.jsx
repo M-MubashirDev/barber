@@ -330,26 +330,46 @@ const CalendarComp = ({
               const isNotAvailable = isDateNotAvailable(dateObj);
 
               // Build styling
+              // let dateStyle =
+              //   "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
+
+              // if (isToday) {
+              //   // style for "today"
+              //   dateStyle +=
+              //     " bg-white border-[0.5px] cursor-pointer border-[#523939] underline text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
+              // } else if (isSelectedDay) {
+              //   // style if selected
+              //   dateStyle += " bg-[#523939] text-white";
+              // } else if (isOutOfRange || isNotAvailable) {
+              //   console.log(isNotAvailable);
+              //   // style if date is blocked
+              //   dateStyle +=
+              //     " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
+              // } else {
+              //   // normal clickable day
+              //   dateStyle +=
+              //     " bg-white border-[0.5px] border-[#523939] text-black hover:text-white cursor-pointer hover:bg-[#523939]";
+              // }
+              // Build styling
               let dateStyle =
                 "flex items-center justify-center aspect-square w-10 h-10 sm:w-12 sm:h-12 rounded-full text-sm sm:text-lg font-semibold transition duration-200";
 
-              if (isToday) {
-                // style for "today"
+              if (isOutOfRange || isNotAvailable) {
+                // style if date is blocked - this takes precedence over isToday
                 dateStyle +=
-                  " bg-white border-[0.5px] border-[#523939] underline text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
+                  " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
+              } else if (isToday) {
+                // style for "today" - only applies if the date is not blocked
+                dateStyle +=
+                  " bg-white border-[0.5px] cursor-pointer border-[#523939] underline text-[#523939] hover:bg-[#523939] border-[#523939] hover:text-white font-black";
               } else if (isSelectedDay) {
                 // style if selected
                 dateStyle += " bg-[#523939] text-white";
-              } else if (isOutOfRange || isNotAvailable) {
-                // style if date is blocked
-                dateStyle +=
-                  " bg-[#EAEAEA] text-black cursor-not-allowed opacity-50";
               } else {
                 // normal clickable day
                 dateStyle +=
                   " bg-white border-[0.5px] border-[#523939] text-black hover:text-white cursor-pointer hover:bg-[#523939]";
               }
-
               return (
                 <div
                   key={index}
