@@ -79,10 +79,10 @@ function About() {
             </div>
           </div>
         </section> */}
-        <section className="py-10 w-[90%] max-w-full mx-auto">
+        <section className="py-10 w-[90%]  max-w-full mx-auto">
           <div className="flex flex-col gap-16 max-w-fit px-4">
             {/* Section 1: Image Left, Text Right */}
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center text-center lg:text-start lg:justify-between lg:gap-12">
               <img
                 src="children-hairdresser-cutting.webp"
                 className="lg:max-w-[50%] max-w-full lg:flex-1"
@@ -102,7 +102,7 @@ function About() {
             </div>
 
             {/* Section 2: Text Left, Image Right */}
-            <div className="flex flex-col-reverse gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+            <div className="flex flex-col-reverse gap-6 lg:flex-row lg:items-center text-center lg:text-start lg:justify-between lg:gap-12">
               <div className="lg:flex-1">
                 <p className="italic-p text-brown-primary">Our Belief</p>
                 <h1 className="mb-6 text-brown-primary h1-heading">

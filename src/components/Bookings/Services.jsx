@@ -9,6 +9,7 @@ import { useState } from "react";
 
 function Services() {
   const { serviceData, isPending } = useServices();
+  console.log(serviceData);
   const [totalPrice, setTotalPrice] = useState(0);
   const [currentSelectedId, setIsCurrentSelectedId] = useState([]);
   const [totalTime, setotalTime] = useState(0);

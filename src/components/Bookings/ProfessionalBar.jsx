@@ -5,12 +5,19 @@ import { useNavigate } from "react-router-dom";
 function ProfessionalBar({ data }) {
   // Manage active state
   const [isActive, setIsActive] = useState(false);
-  const { image, availability, name, notAvailable, _id } = data;
+  const {
+    image = "/imgCircle.png",
+    availability,
+    name,
+    notAvailable,
+    _id,
+  } = data;
+  console.log(image);
   const { to, from } = notAvailable[0] || [];
   const checkFrom = new Date(from);
   const checktoday = new Date();
   const check = checkFrom > checktoday;
-  console.log(check, availability);
+  // console.log(check, availability);
   const handleClick = () => {
     setIsActive(!isActive);
     if (!_id) return;
@@ -41,7 +48,7 @@ function ProfessionalBar({ data }) {
 
       {/* Content */}
       <img
-        src={image || "imgCircle.png"}
+        src={image}
         // src="/imgCircle.png"
         alt="barber"
         className="z-10 max-w-20 max-h-20 w-20 h-20 rounded-full object-cover"
