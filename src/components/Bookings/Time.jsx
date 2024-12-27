@@ -502,6 +502,7 @@ function Time() {
     };
     setReservationData(reservationData);
   }
+  console.log(totalTime);
 
   if (isPending || pendingShopeTiming || !obj || !Object.keys(obj).length) {
     return <Spinner />;
@@ -526,6 +527,7 @@ function Time() {
             select={{ selectedDay, setSelectedDay }}
             available={{ availableTimeSlots, setAvailableTimeSlots }}
             shopTime={shopTime}
+            lastSlot={totalTime}
           />
         </div>
 

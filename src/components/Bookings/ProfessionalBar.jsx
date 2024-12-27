@@ -39,13 +39,10 @@ function ProfessionalBar({ data }) {
       // ${
       //   !availability ? "pointer-events-none cursor-not-allowed opacity-50" : ""
       // }
-      className={`relative uppercase flex items-center sm:gap-6 gap-2 hover:text-white    shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] transition-shadow cursor-pointer border-[#4F4F4F] border-[0.5px] rounded-[100px] px-2 py-2 overflow-hidden 
+      className={`hover:bg-brown-primary  uppercase flex items-center sm:gap-6 gap-2 hover:text-white    shadow-[0_4px_8px_rgba(0, 0, 0, 0.7)] transition-shadow cursor-pointer border-[#4F4F4F] border-[0.5px] rounded-[100px] px-2 py-2 overflow-hidden 
       ${isActive ? "bg-[#523939] text-white" : "text-[#523939]"}
       group`}
     >
-      {/* Pseudo-element for expanding background */}
-      <span className="absolute inset-0 bg-[#523939] scale-0 group-hover:scale-100 transition-transform duration-500 ease-in-out origin-center z-0"></span>
-
       {/* Content */}
       <img
         src={image}
