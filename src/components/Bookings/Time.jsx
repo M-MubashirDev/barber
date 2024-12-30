@@ -158,7 +158,6 @@ function Time() {
 
   const { obj } = currentSelectedServices || {}; // e.g., { currentSelectedId, totalTime }
   const { currentSelectedId, totalTime } = obj || {};
-
   useEffect(() => {
     // If no selected services, redirect
     if (!obj || !Object.keys(obj).length) {

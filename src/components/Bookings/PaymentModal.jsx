@@ -1,9 +1,8 @@
-////////////////////
 /* eslint-disable react/prop-types */
-// import { useState } from "react";/* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePayMutate } from "./Hooks/usePayMutate";
+import useOnlineBooking from "./Hooks/useOnlineBooking";
 
 const PaymentModal = ({
   isOpen,
@@ -11,7 +10,10 @@ const PaymentModal = ({
   setReservationData,
   reservationsData,
 }) => {
-  const { mutatePay, isPending } = usePayMutate();
+  const { mutatePay, isPending, isSuccess: isPaySuccess } = usePayMutate();
+  const { mutateOnlineBooking, isSuccess: isBookingSuccess } =
+    useOnlineBooking();
+
   // Payment Information States
   const [cardNumber, setCardNumber] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
@@ -29,12 +31,28 @@ const PaymentModal = ({
   const [email, setEmail] = useState("");
 
   // Payment Calculations
-  const [amount, setamount] = useState(reservationsData.grandTotal || 10);
-  const [tip, settip] = useState(reservationsData.tip);
+  const [amount, setAmount] = useState(
+    Number(reservationsData.grandTotal) || 10
+  );
+  const [tip, setTip] = useState(reservationsData.tip);
 
+  // Function to calculate end time
+  function getEndTime(startTime, durationInMinutes) {
+    const date = new Date();
+    const [startHours, startMinutes] = startTime.split(":");
+    date.setHours(parseInt(startHours));
+    date.setMinutes(parseInt(startMinutes));
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    date.setMinutes(date.getMinutes() + durationInMinutes);
+    const endHours = String(date.getHours()).padStart(2, "0");
+    const endMinutes = String(date.getMinutes()).padStart(2, "0");
+    return `${endHours}:${endMinutes}`;
+  }
+
+  // Update amount on reservationsData change
   useEffect(() => {
-    console.log(amount);
-    setamount(Number(reservationsData.grandTotal));
+    setAmount(Number(reservationsData.grandTotal));
   }, [amount, reservationsData]);
 
   // Utility function to convert time to 24-hour format
@@ -43,7 +61,6 @@ const PaymentModal = ({
     let [hours, minutes] = time.split(":");
     hours = parseInt(hours, 10);
     minutes = parseInt(minutes, 10);
-
     if (modifier === "PM" && hours !== 12) {
       hours += 12;
     }
@@ -58,54 +75,40 @@ const PaymentModal = ({
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Frontend Validations
     const isValidCardNumber = /^\d{16}$/.test(cardNumber);
     const isValidExpirationDate = /^(0[1-9]|1[0-2])\d{2}$/.test(
       expirationDate.replace("/", "")
     );
     const isValidCVV = /^\d{3,4}$/.test(cvv);
-    const isValidZipCode = /^\d{4,10}$/.test(zipCode); // Adjust based on country
+    const isValidZipCode = /^\d{4,10}$/.test(zipCode);
 
     if (!isValidCardNumber) {
       alert("Card number must be exactly 16 digits.");
       return;
     }
-
     if (!isValidExpirationDate) {
       alert("Expiration date must be in MMYY format.");
       return;
     }
-
     if (!isValidCVV) {
       alert("CVV must be 3 or 4 digits.");
       return;
     }
-
     if (!isValidZipCode) {
       alert("Zip Code must be between 4 to 10 digits.");
       return;
     }
 
-    // Convert time to 24-hour format
     const formattedTime = convertTo24Hour(reservationsData.time);
-
-    // Extract service ObjectIds
-    // const serviceIds =
-    //   Array.isArray(reservationsData.services) &&
-    //   reservationsData.services.map((service) => service._id);
-
-    // Ensure 'professional' is a valid ObjectId
     const professionalId = reservationsData.professional;
-
     if (!professionalId) {
       alert("Professional ID is missing.");
       return;
     }
 
-    // Prepare Payment Data
     const paymentData = {
       cardNumber,
-      expirationDate: expirationDate.replace("/", ""), // "MMYY"
+      expirationDate: expirationDate.replace("/", ""),
       cvv,
       firstName,
       lastName,
@@ -114,30 +117,58 @@ const PaymentModal = ({
       country,
       state,
       city,
-      phone: phone.replace(/[^+\d]/g, ""), // Remove non-numeric except '+'
+      phone: phone.replace(/[^+\d]/g, ""),
       email: email.toLowerCase(),
       amount: Number(amount),
       tip: Number(tip) || 0,
       subTotal: Number(reservationsData.subTotal),
       grandTotal: Number(reservationsData.grandTotal),
-      date: new Date(reservationsData.date).toISOString(), // Ensure it's a Date object
+      date: new Date(reservationsData.date).toISOString(),
       time: formattedTime,
-      professional: professionalId, // Valid ObjectId
-      services: reservationsData.services, // Array of ObjectIds
+      professional: professionalId,
+      services: reservationsData.services,
       totalServiceTime: `${reservationsData.totalServiceTime} minutes`,
     };
 
-    // Combine with existing reservation data
-    console.log(reservationsData);
     const combinedData = { ...reservationsData, ...paymentData };
-    setReservationData(combinedData);
     mutatePay(combinedData);
-    console.log(combinedData);
-
-    // For demonstration, we'll just close the modal
-    onClose(false);
+    const newBooking = {
+      onlineBookingDetails: [
+        {
+          date: new Date(reservationsData.date).toISOString().split("T")[0],
+          startTime: reservationsData.time,
+          endTime: getEndTime(
+            reservationsData.time,
+            parseInt(reservationsData.totalServiceTime)
+          ),
+        },
+      ],
+    };
+    setReservationData(combinedData);
+    mutateOnlineBooking({ api: professionalId, data: newBooking });
   };
-  // If modal is not open, do not render anything
+
+  // Clear fields when payment and booking are successful
+  useEffect(() => {
+    if (isPaySuccess && isBookingSuccess) {
+      setCardNumber("");
+      setExpirationDate("");
+      setCvv("");
+      setFirstName("");
+      setLastName("");
+      setAddress("");
+      setZipCode("");
+      setCountry("");
+      setState("");
+      setCity("");
+      setPhone("");
+      setEmail("");
+      setAmount(Number(reservationsData.grandTotal) || 10);
+      setTip(reservationsData.tip);
+      onClose(false);
+    }
+  }, [isPaySuccess, isBookingSuccess, reservationsData, onClose]);
+
   if (!isOpen) return null;
 
   return createPortal(
@@ -147,7 +178,6 @@ const PaymentModal = ({
       role="dialog"
     >
       <div className="relative w-full max-w-lg bg-white rounded-lg shadow-lg">
-        {/* Close Button */}
         <button
           onClick={() => onClose(false)}
           className="absolute top-4 right-4 text-4xl text-gray-500 hover:text-gray-700 focus:outline-none"
@@ -156,15 +186,12 @@ const PaymentModal = ({
           &times;
         </button>
 
-        {/* Modal Content */}
         <div className="p-6 max-h-[90vh] overflow-auto">
           <h2 className="text-2xl font-bold mb-4 text-[#523939]">
             Payment Details
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Payment Information */}
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
-              {/* Card Number */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -185,7 +212,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Expiration Date */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -206,7 +232,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* CVV */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -227,7 +252,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* First Name */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -246,7 +270,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Last Name */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -265,7 +288,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Address */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -284,7 +306,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Zip Code */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -305,7 +326,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Country */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -324,7 +344,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* State */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -343,7 +362,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* City */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -362,7 +380,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Phone */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -382,7 +399,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Email */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -401,7 +417,6 @@ const PaymentModal = ({
                 />
               </div>
 
-              {/* Amount */}
               <div>
                 <label
                   className="block mb-1 text-[#523939] font-semibold"
@@ -419,14 +434,13 @@ const PaymentModal = ({
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="flex justify-end">
               <button
                 disabled={isPending}
                 type="submit"
                 className="bg-[#523939] text-white py-2 px-4 rounded hover:bg-[#3f2e2e] focus:outline-none"
               >
-                {isPending ? "pending" : " Submit Payment"}
+                {isPending ? "Processing..." : "Submit Payment"}
               </button>
             </div>
           </form>
@@ -437,4 +451,4 @@ const PaymentModal = ({
   );
 };
 
-export default PaymentModal;
+export default memo(PaymentModal);

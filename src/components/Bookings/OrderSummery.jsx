@@ -276,6 +276,7 @@ function OrderSummery({
     });
   }
 
+  console.log(reservationsData, "💕💕💕");
   useEffect(() => {
     // Optional: Log the current tip details for debugging
     console.log("Final Tip:", finalTip, "Tip Dollar:", tipDollar);

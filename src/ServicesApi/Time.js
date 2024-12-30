@@ -12,3 +12,18 @@ export async function Time({ api }) {
     throw error;
   }
 }
+
+export async function postTime({ api, data }) {
+  console.log("API Endpoint:", api);
+  console.log("Data Sent:", data);
+  try {
+    const response = await axios.patch(
+      `https://hotrodsbackend.onrender.com/inquire/${api}`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching professional data:", error.message);
+    throw error;
+  }
+}
