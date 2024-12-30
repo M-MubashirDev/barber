@@ -328,7 +328,7 @@ function OrderSummery({
             Date:
           </p>
           <p className="font-medium text-[16px] flex justify-between leading-[19.5px]">
-            {reservationsData.date}
+            {new Date(reservationsData.date).toDateString()}
           </p>
         </div>
       )}
