@@ -107,7 +107,8 @@ function Services() {
         <div className="max-w-fit flex flex-col lg:items-start items-center">
           <LinksBar />
           <h1 className="booking-h1">Choose Services</h1>
-          <div className="grid md:grid-cols-2 gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
+          {/* <div className="grid md:grid-cols-2 gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start"> */}
+          <div className="flex flex-wrap gap-4 max-w-80 md:min-w-[40rem] items-center lg:justify-start">
             {professionalServices?.map((val) => (
               <Duration
                 key={val._id}
