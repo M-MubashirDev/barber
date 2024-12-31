@@ -276,10 +276,10 @@ function OrderSummery({
     });
   }
 
-  console.log(reservationsData, "💕💕💕");
+  // console.log(reservationsData, "💕💕💕");
   useEffect(() => {
     // Optional: Log the current tip details for debugging
-    console.log("Final Tip:", finalTip, "Tip Dollar:", tipDollar);
+    // console.log("Final Tip:", finalTip, "Tip Dollar:", tipDollar);
   }, [finalTip, tipDollar]);
 
   return (

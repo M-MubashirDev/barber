@@ -156,7 +156,7 @@ const CalendarComp = ({
   function onClickDay(dayNumber, dateObject) {
     // If the entire day is blocked, do nothing
     if (isDateNotAvailable(dateObject)) {
-      console.log("Date is fully not available:", dateObject);
+      // console.log("Date is fully not available:", dateObject);
       return;
     }
 
@@ -209,9 +209,9 @@ const CalendarComp = ({
     const finalAvailable = getAvailableTimeSlots(allSlots, blockedSlots);
     setAvailableTimeSlots(finalAvailable);
 
-    console.log("Clicked date => ", dateObject, localDateString);
-    console.log("Blocked => ", blockedSlots);
-    console.log("Final => ", finalAvailable);
+    // console.log("Clicked date => ", dateObject, localDateString);
+    // console.log("Blocked => ", blockedSlots);
+    // console.log("Final => ", finalAvailable);
   }
 
   // ---------------------------

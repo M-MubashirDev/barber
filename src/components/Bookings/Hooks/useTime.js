@@ -4,14 +4,14 @@ import { useParams } from "react-router-dom";
 
 export function useTime() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const {
     data: timeData,
     isPending,
     error,
   } = useQuery({
     queryKey: ["Time"],
-    queryFn: () => Time({ api: `inquire` }),
+    queryFn: () => Time({ api: `inquire/${id}` }),
     // staleTime: 15 * 60 * 1000, // 7 minutes in milliseconds
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -19,6 +19,6 @@ export function useTime() {
     // Prevent refetching on tab focus
     // refetchOnMount: false, // Prevent refetching on remount
   });
-  console.log(timeData);
+  // console.log(timeData);
   return { timeData, isPending, error };
 }

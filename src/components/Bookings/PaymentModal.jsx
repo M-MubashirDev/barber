@@ -71,6 +71,7 @@ const PaymentModal = ({
       .toString()
       .padStart(2, "0")}`;
   };
+  //////////
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -132,10 +133,20 @@ const PaymentModal = ({
 
     const combinedData = { ...reservationsData, ...paymentData };
     mutatePay(combinedData);
+    /////
+    const dt = new Date(reservationsData.date);
+
+    const year = dt.getFullYear();
+    const month = String(dt.getMonth() + 1).padStart(2, "0");
+    const day = String(dt.getDate()).padStart(2, "0");
+
+    const localDateString = `${year}-${month}-${day}`;
+
+    /////
     const newBooking = {
       onlineBookingDetails: [
         {
-          date: new Date(reservationsData.date).toISOString().split("T")[0],
+          date: localDateString,
           startTime: reservationsData.time,
           endTime: getEndTime(
             reservationsData.time,
@@ -144,6 +155,7 @@ const PaymentModal = ({
         },
       ],
     };
+    // console.log(reservationsData.date, "🐱‍💻🐱‍💻", localDateString);
     setReservationData(combinedData);
     mutateOnlineBooking({ api: professionalId, data: newBooking });
   };

@@ -41,7 +41,7 @@ function Professional() {
   const { professionData, isPending } = useProfessionals();
 
   // Debugging log for professionData
-  console.log(professionData);
+  // console.log(professionData);
 
   // Store fetched data in sessionStorage
   if (professionData) {

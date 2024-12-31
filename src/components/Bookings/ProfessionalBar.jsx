@@ -12,7 +12,7 @@ function ProfessionalBar({ data }) {
     notAvailable,
     _id,
   } = data;
-  console.log(image);
+  // console.log(image);
   const { to, from } = notAvailable[0] || [];
   const checkFrom = new Date(from);
   const checktoday = new Date();
