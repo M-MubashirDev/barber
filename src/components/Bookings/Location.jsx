@@ -6,7 +6,7 @@ function Location() {
     <div
       style={{
         backgroundImage: "url('locationbg.webp')",
-        minHeight: "calc(100vh - 82.8px)",
+        minHeight: "calc(100vh - 88.4px)",
         backgroundPosition: "bottom",
         backgroundSize: "cover",
       }}
